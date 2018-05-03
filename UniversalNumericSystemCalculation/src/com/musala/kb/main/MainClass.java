@@ -48,7 +48,7 @@ public class MainClass {
 	public static void main(String[] args) {
 
 		Scanner s = new Scanner(System.in);
-		
+
 		// binary test
 
 		ContextNumericSystems chr_binary = new ContextNumericSystems();
@@ -82,7 +82,7 @@ public class MainClass {
 		while (!(input = s.nextLine()).equals("")) {
 			System.out.println(chr_octal.fromDecimal(input));
 		}
-		
+
 		s.close();
 
 	}
