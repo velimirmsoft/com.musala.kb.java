@@ -1,18 +1,7 @@
 package com.musala.kb.solution.iterator;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.musala.kb.solution.general.MapUtilis;
 
@@ -46,11 +35,11 @@ public class IteratorReadAndPrintFIle {
 		int counter = 0;
 		try {
 			for (String sCurrentLine : new FileLineIterable(filePath)) {
-			
+
 				if (!sCurrentLine.equals("<<>>")) {
 
 					counter = counter + 1;
-					
+
 					if (counter == 1) {
 						// System.out.println(sCurrentLine);
 						// System.out.println(counter);
@@ -84,7 +73,7 @@ public class IteratorReadAndPrintFIle {
 				}
 
 			}
-			
+
 		} catch (NumberFormatException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

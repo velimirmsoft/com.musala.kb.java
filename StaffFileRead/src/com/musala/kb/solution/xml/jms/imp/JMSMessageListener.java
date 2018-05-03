@@ -1,7 +1,5 @@
 package com.musala.kb.solution.xml.jms.imp;
 
-import java.util.ArrayList;
-
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.Message;

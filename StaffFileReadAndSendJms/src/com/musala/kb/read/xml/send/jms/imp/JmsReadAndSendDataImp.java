@@ -1,27 +1,14 @@
 package com.musala.kb.read.xml.send.jms.imp;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Queue;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.MessageProducer;
-import javax.jms.QueueConnection;
-import javax.jms.QueueConnectionFactory;
-import javax.jms.QueueSender;
-import javax.jms.QueueSession;
 import javax.jms.Session;
-import javax.jms.TextMessage;
-import javax.naming.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -44,12 +31,14 @@ public class JmsReadAndSendDataImp implements JmsReadAndSendDataInterface {
 	}
 
 	@Override
-	public void readXmlFileAndStoreInMemory(String filePath) {
+	public int readXmlFileAndStoreInMemory(String filePath) {
 
 		// read and fill from xml file here ...
 
+		int status = -1;
+
 		try {
-			
+
 			System.out.println("Reading XML file and storing in memory ...");
 
 			File fXmlFile = new File(filePath);
@@ -86,22 +75,33 @@ public class JmsReadAndSendDataImp implements JmsReadAndSendDataInterface {
 
 				}
 			}
+
+			// reading XML is done
+			if (names.size() != 0 && ages.size() != 0 && lenOfServices.size() != 0) {
+				status = 1;
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			return status;
 		}
+
+		return status;
 
 	}
 
 	@Override
-	public void sendDataViaJMS() {
+	public int sendDataViaJMS() {
 
 		Connection connection = null;
 
+		int status = 0;
+		
 		try {
-			
+
 			System.out.println("About to send data via JMS ... ");
 
-			Context ctx = new InitialContext();
+			// Context ctx = new InitialContext();
 
 			ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory("tcp://localhost:61616");
 
@@ -116,24 +116,25 @@ public class JmsReadAndSendDataImp implements JmsReadAndSendDataInterface {
 			MapMessage message = session.createMapMessage();
 
 			System.out.println("Messages to send = " + names.size());
-			for(int i = 0; i < names.size(); i++) {
-				
+			for (int i = 0; i < names.size(); i++) {
+
 				System.out.println("toSend = " + names.get(i));
-				
+
 				message.setString("name", names.get(i));
 				message.setString("age", ages.get(i));
 				message.setString("lenOfService", lenOfServices.get(i));
 				messageProducer.send(message);
-				
+
 			}
-			
+
 			// send end msg
 			message.setString("end", "yes");
 			messageProducer.send(message);
-			
+
 			System.out.println("Messages are sent ...");
 
 		} catch (Exception e) {
+			System.out.println("we got exception!");
 			System.out.println(e);
 		} finally {
 			if (connection != null) {
@@ -143,8 +144,12 @@ public class JmsReadAndSendDataImp implements JmsReadAndSendDataInterface {
 					System.out.println(e);
 				}
 			}
-			System.exit(0);
+			status = -1;
+			// this quits the problem - we dont want that for our tests
+			// System.exit(0);
 		}
+		
+		return status;
 
 	}
 

@@ -1,9 +1,5 @@
 package com.musala.kb.solution.xml.jms.imp;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,15 +7,8 @@ import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
-import javax.naming.InitialContext;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import com.musala.kb.solution.general.MapUtilis;
 import com.musala.kb.solution.xml.jms.ReceiveAndCalcEmployeesStatsInterface;
@@ -52,7 +41,7 @@ public class ReceiveAndCalcEmployeesStatsImp implements ReceiveAndCalcEmployeesS
 
 			System.out.println("Setting up listener for JMS data ...");
 
-			InitialContext ctx = new InitialContext();
+			// InitialContext ctx = new InitialContext();
 
 			ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory("tcp://localhost:61616");
 

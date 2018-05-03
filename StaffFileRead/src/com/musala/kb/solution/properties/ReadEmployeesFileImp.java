@@ -12,20 +12,20 @@ import java.util.Properties;
 import com.musala.kb.solution.general.MapUtilis;
 
 public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
-	
+
 	private static final String propertiesFilePath = "res/config.properties";
 
-	// use this proterties values to read/get/manipulate data in our txt file
+	// use this properties values to read/get/manipulate data in our txt file
 	private String separatorString = "";
 	private String sepratorKeyValueString = "";
 	private String keyNameString = "";
 	private String keyAgeString = "";
 	private String keyServiceLengthString = "";
-	
+
 	private int avgAgeOfEmployees = 0;
 	private float avgServiceOfEmployees = 0;
 	private float maxLengthOfService = 0;
-	
+
 	private ArrayList<String> names = new ArrayList<String>();
 	private ArrayList<String> ages = new ArrayList<String>();
 	private ArrayList<String> lenOfServices = new ArrayList<String>();
@@ -36,7 +36,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 
 	@Override
 	public void readFileAndStoreInMemory(String filePath) {
-		
+
 		BufferedReader br = null;
 		FileReader fr = null;
 
@@ -46,7 +46,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 			br = new BufferedReader(fr);
 
 			String sCurrentLine;
-			
+
 			while ((sCurrentLine = br.readLine()) != null) {
 
 				if (!sCurrentLine.equals(separatorString)) {
@@ -91,7 +91,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 
 	@Override
 	public void calculateAvgAge() {
-			
+
 		if (ages.isEmpty()) {
 			try {
 				throw new Exception("error!");
@@ -106,17 +106,17 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 			for (String age : ages) {
 				sumAge = sumAge + Integer.parseInt(age);
 			}
-			
-			avgAgeOfEmployees = sumAge / (ages.size());	
+
+			avgAgeOfEmployees = sumAge / (ages.size());
 			System.out.println("avgAgeOfEmployees = " + avgAgeOfEmployees);
 
 		}
-	
+
 	}
 
 	@Override
 	public void calculateAvgServicesOfEmployees() {
-		
+
 		if (lenOfServices.isEmpty()) {
 			try {
 				throw new Exception("error!");
@@ -132,17 +132,17 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 				float c = Float.parseFloat(lenOfService);
 				sumService = sumService + c;
 			}
-			
+
 			avgServiceOfEmployees = sumService / (lenOfServices.size());
 			System.out.println("avgServiceOfEmployees = " + avgServiceOfEmployees);
 
 		}
-		
+
 	}
 
 	@Override
 	public void calculateMaxLengthOfService() {
-		
+
 		if (lenOfServices.isEmpty()) {
 			try {
 				throw new Exception("error!");
@@ -159,16 +159,16 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 					maxLengthOfService = c;
 				}
 			}
-			
+
 			System.out.println("maxLengthOfService = " + maxLengthOfService);
 
 		}
-		
+
 	}
 
 	@Override
 	public void calculateMostCommonChars() {
-		
+
 		String oneLongName = "";
 		for (String name : names) {
 			oneLongName = oneLongName + name;
@@ -179,12 +179,11 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 		System.out.println("Top 2 char = " + mapOfMostCommonChars.get(1));
 		System.out.println("Top 3 char = " + mapOfMostCommonChars.get(2));
 
-		
 	}
 
 	@Override
 	public void readPropertyFile() {
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -196,7 +195,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 			prop.load(input);
 
 			// get the property value
-			
+
 			separatorString = prop.getProperty("separator");
 			sepratorKeyValueString = prop.getProperty("separator-key-value");
 			keyNameString = prop.getProperty("key-name");
@@ -214,7 +213,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 				}
 			}
 		}
-		
+
 	}
 
 }

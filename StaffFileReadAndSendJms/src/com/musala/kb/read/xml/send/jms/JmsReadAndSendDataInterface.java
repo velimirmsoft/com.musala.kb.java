@@ -4,8 +4,8 @@ public interface JmsReadAndSendDataInterface {
 	
 	public static String topicToListen = "listen.to.employees.data";
 
-	public void readXmlFileAndStoreInMemory(String filePath);
+	public int readXmlFileAndStoreInMemory(String filePath);
 	
-	public void sendDataViaJMS();
+	public int sendDataViaJMS();
 	
 }
