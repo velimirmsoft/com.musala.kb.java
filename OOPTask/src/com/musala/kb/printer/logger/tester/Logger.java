@@ -1,13 +1,9 @@
-package com.musala.kb.test;
-
-import static com.musala.kb.test.Print.mPrint;
+package com.musala.kb.printer.logger.tester;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import com.musala.kb.vehicle.Vehicle;
 import com.musala.kb.vehicle.impl.Boat;
@@ -22,17 +18,18 @@ public class Logger {
 	private static final String OUTPUT_FILE = "res/output.txt";
 	private String lineSep = System.lineSeparator();
 
-	private Truck truck;
-	private Motorcycle motorcycle;
-	private Car car;
-	private Train train;
-	private Boat boat;
-	private Audi audi;
+	public void clearFile() {
+		// clear file
+		File tempFile = new File(OUTPUT_FILE);
+		if (tempFile != null) {
+			if (tempFile.exists()) {
+				tempFile.delete();
+			}
+		}
+		tempFile = null;
+	}
 
 	public void writeDataToTextFile(Vehicle v) {
-
-		// clear file
-		// if (!new File(OUTPUT_FILE).delete()) {}
 
 		String toAppend = "";
 

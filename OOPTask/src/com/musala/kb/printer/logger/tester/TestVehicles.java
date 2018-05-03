@@ -1,4 +1,6 @@
-package com.musala.kb.test;
+package com.musala.kb.printer.logger.tester;
+
+import static com.musala.kb.printer.logger.tester.Print.*;
 
 import com.musala.kb.vehicle.Vehicle;
 import com.musala.kb.vehicle.impl.Boat;
@@ -7,8 +9,6 @@ import com.musala.kb.vehicle.impl.Motorcycle;
 import com.musala.kb.vehicle.impl.Train;
 import com.musala.kb.vehicle.impl.Truck;
 import com.musala.kb.vehicle.impl.car.audi.Audi;
-
-import static com.musala.kb.test.Print.mPrint;
 
 public class TestVehicles {
 
@@ -23,7 +23,7 @@ public class TestVehicles {
 
 	}
 
-	public void setAndTestTruck(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
+	public String setAndTestTruck(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
 
 		this.truck = (Truck) v;
 		truck.setWheels(wheels);
@@ -41,6 +41,8 @@ public class TestVehicles {
 		truck.move();
 
 		System.out.println("-----------------------------------------");
+		
+		return getAllPrintedText();
 
 	}
 	
@@ -48,7 +50,7 @@ public class TestVehicles {
 		return truck;
 	}
 
-	public void setAndTestMotorcycle(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
+	public String setAndTestMotorcycle(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
 
 		this.motorcycle = (Motorcycle) v;
 		motorcycle.setWheels(wheels);
@@ -66,6 +68,8 @@ public class TestVehicles {
 		motorcycle.move();
 
 		System.out.println("-----------------------------------------");
+		
+		return getAllPrintedText();
 
 	}
 	
@@ -73,7 +77,7 @@ public class TestVehicles {
 		return motorcycle;
 	}
 	
-	public void setAndTestCar(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
+	public String setAndTestCar(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
 
 		this.car = (Car) v;
 		car.setWheels(wheels);
@@ -92,13 +96,15 @@ public class TestVehicles {
 
 		System.out.println("-----------------------------------------");
 
+		return getAllPrintedText();
+		
 	}
 	
 	public Car getCar() {
 		return car;
 	}
 	
-	public void setAndTestTrain(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
+	public String setAndTestTrain(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
 
 		this.train = (Train) v;
 		train.setWheels(wheels);
@@ -120,13 +126,15 @@ public class TestVehicles {
 
 		System.out.println("-----------------------------------------");
 
+		return getAllPrintedText();
+		
 	}
 	
 	public Train getTrain() {
 		return train;
 	}
 	
-	public void setAndTestBoat(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
+	public String setAndTestBoat(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
 
 		this.boat = (Boat) v;
 		boat.setWheels(wheels);
@@ -147,6 +155,8 @@ public class TestVehicles {
 		boat.floating();
 
 		System.out.println("-----------------------------------------");
+		
+		return getAllPrintedText();
 
 	}
 	
@@ -154,7 +164,7 @@ public class TestVehicles {
 		return boat;
 	}
 	
-	public void setAndTestAudi(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
+	public String setAndTestAudi(Vehicle v, int wheels, String model, String engineType, double maxSpeed) {
 
 		this.audi = (Audi) v;
 		audi.setWheels(wheels);
@@ -173,6 +183,8 @@ public class TestVehicles {
 		audi.move();
 
 		System.out.println("-----------------------------------------");
+		
+		return getAllPrintedText();
 
 	}
 	

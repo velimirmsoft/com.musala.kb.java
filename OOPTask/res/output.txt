@@ -24,7 +24,7 @@ CHUCHU
 true
 -------------------------------------------
 Boat
-xxx
+BoatX
 100.0
 seaMaster
 0
