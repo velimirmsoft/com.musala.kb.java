@@ -9,10 +9,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 public class MapUtilis {
 
+	@SuppressWarnings("deprecation")
 	public static List<String> countCharactersInString(String s, boolean debugPrint) {
 
 		// we are working with names, so yea, chars that are letters only are considered
@@ -41,34 +41,30 @@ public class MapUtilis {
 		for (Entry<Character, Integer> entry : histogramOfChars.entrySet()) {
 			ls.add("" + entry.getKey());
 		}
-		
+
 		// debug print our map
 		if (debugPrint) {
 			for (Entry<Character, Integer> entry : histogramOfChars.entrySet()) {
 				System.out.println(entry.getKey() + " - " + entry.getValue());
 			}
 		}
-		
+
 		return ls;
 
 	}
 
 	// sort function of a map
 	private static Map<Character, Integer> sortByValue(Map<Character, Integer> unsortMap) {
-		
-		
+
 		/*
-		// Map<Character, Integer> sortedMap = new HashMap<Character, Integer>();
-		// TreeMap sorter - SORTING by KEY
-		 Map<Character, Integer> treeMap = new TreeMap<Character, Integer>();
-
-	    /* For Java 8, try this lambda
-		Map<Integer, String> treeMap = new TreeMap<>(
-		                (Comparator<Integer>) (o1, o2) -> o2.compareTo(o1)
-		        );		
-        treeMap.putAll(unsortMap);
-        */
-
+		 * // Map<Character, Integer> sortedMap = new HashMap<Character, Integer>(); //
+		 * TreeMap sorter - SORTING by KEY Map<Character, Integer> treeMap = new
+		 * TreeMap<Character, Integer>();
+		 * 
+		 * /* For Java 8, try this lambda Map<Integer, String> treeMap = new TreeMap<>(
+		 * (Comparator<Integer>) (o1, o2) -> o2.compareTo(o1) );
+		 * treeMap.putAll(unsortMap);
+		 */
 
 		// 1. Convert Map to List of Map
 		List<Entry<Character, Integer>> list = new LinkedList<Map.Entry<Character, Integer>>(unsortMap.entrySet());
@@ -90,5 +86,5 @@ public class MapUtilis {
 
 		return sortedMap;
 	}
-	
+
 }

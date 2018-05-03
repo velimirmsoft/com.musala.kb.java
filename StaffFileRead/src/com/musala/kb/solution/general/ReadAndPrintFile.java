@@ -3,16 +3,8 @@ package com.musala.kb.solution.general;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class ReadAndPrintFile {
 
@@ -26,10 +18,7 @@ public class ReadAndPrintFile {
 	 * 
 	 */
 
-	private String filePath = "res/db.txt";
-
 	private int avgAgeOfEmployees = 0;
-	private String mostCommonChars = "";
 	private float avgServiceOfEmployees = 0;
 	private float maxLengthOfService = 0;
 
@@ -53,7 +42,7 @@ public class ReadAndPrintFile {
 
 		try (FileReader fr = new FileReader(filePath); BufferedReader br = new BufferedReader(fr);) {
 			// Process the input and produce the output
-			
+
 			String sCurrentLine;
 
 			while ((sCurrentLine = br.readLine()) != null) {
@@ -73,7 +62,7 @@ public class ReadAndPrintFile {
 				}
 
 			}
-			
+
 		} catch (IOException ex) {
 			// Print out all exceptions, including suppressed ones
 			System.err.println("thrown exception: " + ex.toString());
