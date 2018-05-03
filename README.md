@@ -4,11 +4,17 @@ Musala KB java tasks and things.
 Concepts:
 
 - OOP structure
-- File reading and writing
-- Maps, Arrays ...
-- JMS
+	+ Classes, Methods, Encapsulation
+	+ Interfaces, Abstract Classes
+	+ Inheritance and Polymorphism
+	+ Modularity and Specification
+	
+- File reading and writing, Java try/catch with resources
+- Properties, XML and TXT file parsing
+- Console InputOutput streams
+- Maps, ArraysLists ...
+- JMS (Java messaging service)
 - Algorithms
-- XML parsing
-- JUnit testing
+- JUnit testing (simple tests & parameterzied tests)
 
 By Velimir Avramovski @MusalaSoft.
