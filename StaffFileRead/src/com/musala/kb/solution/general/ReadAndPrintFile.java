@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.musala.kb.solution.utilis.CalculateStuff;
+
 public class ReadAndPrintFile {
 
 	/*
@@ -18,9 +20,7 @@ public class ReadAndPrintFile {
 	 * 
 	 */
 
-	private int avgAgeOfEmployees = 0;
-	private float avgServiceOfEmployees = 0;
-	private float maxLengthOfService = 0;
+	private CalculateStuff calculator = null;
 
 	private ArrayList<String> names = new ArrayList<String>();
 	private ArrayList<String> ages = new ArrayList<String>();
@@ -28,9 +28,12 @@ public class ReadAndPrintFile {
 
 	public ReadAndPrintFile() {
 		System.out.println("General solution ... \n");
+		calculator = new CalculateStuff();
 	}
 
-	public void readFileData(String filePath) {
+	public int readFileData(String filePath) {
+
+		int status = -1;
 
 		// This compliant solution uses a try-with-resources statement to manage both br
 		// and bw:
@@ -63,7 +66,12 @@ public class ReadAndPrintFile {
 
 			}
 
+			if (names.size() != 0 && ages.size() != 0 && lenOfServices.size() != 0) {
+				status = 1;
+			}
+
 		} catch (IOException ex) {
+			status = -1;
 			// Print out all exceptions, including suppressed ones
 			System.err.println("thrown exception: " + ex.toString());
 			Throwable[] suppressed = ex.getSuppressed();
@@ -72,34 +80,26 @@ public class ReadAndPrintFile {
 			}
 		}
 
+		return status;
+
 	}
 
-	public int calculateThings() {
+	public String calculateThings() {
 
 		if (names.isEmpty() || ages.isEmpty() || lenOfServices.isEmpty()) {
-			return -1;
+			return "-1";
 		} else {
 
 			// avgAgeOfEmployees
-			int sumAge = 0;
-			for (String age : ages) {
-				sumAge = sumAge + Integer.parseInt(age);
-			}
-			avgAgeOfEmployees = sumAge / (ages.size());
-			System.out.println("avgAgeOfEmployees = " + avgAgeOfEmployees);
+			String avgAge = "" + calculator.calculateAvgAgeOfEmployees(ages);
+			System.out.println("avgAgeOfEmployees = " + avgAge);
 
-			// avgServiceOfEmployees & maxLengthOfService
-			float sumService = 0;
-			for (String lenOfService : lenOfServices) {
-				float c = Float.parseFloat(lenOfService);
-				sumService = sumService + c;
-				if (c > maxLengthOfService) {
-					maxLengthOfService = c;
-				}
-			}
-			avgServiceOfEmployees = sumService / (lenOfServices.size());
-			System.out.println("avgServiceOfEmployees = " + avgServiceOfEmployees);
-			System.out.println("maxLengthOfService = " + maxLengthOfService);
+			// avgServiceOfEmployees
+			float[] r = calculator.calculateAvgServiceOfEmployeesAndMaxService(lenOfServices);
+			System.out.println("avgServiceOfEmployees = " + r[1]);
+
+			// maxLengthOfService
+			System.out.println("maxLengthOfService = " + r[0]);
 
 			// find the most common chars
 			// just merge all the strings, and send them to the function below
@@ -109,12 +109,32 @@ public class ReadAndPrintFile {
 				oneLongName = oneLongName + name;
 			}
 
-			List<String> mapOfMostCommonChars = MapUtilis.countCharactersInString(oneLongName, false);
+			List<String> mapOfMostCommonChars = CalculateStuff.countCharactersInString(oneLongName, false);
 			System.out.println("Top 1 char = " + mapOfMostCommonChars.get(0));
 			System.out.println("Top 2 char = " + mapOfMostCommonChars.get(1));
 			System.out.println("Top 3 char = " + mapOfMostCommonChars.get(2));
 
-			return 1;
+			/*
+			byte ptext[];
+			String c1 = "";
+			String c2 = "";
+			String c3 = "";
+			try {
+				ptext = mapOfMostCommonChars.get(0).getBytes("ISO-8859-1");
+				c1 = new String(ptext, "UTF-16"); 
+				ptext = mapOfMostCommonChars.get(1).getBytes("ISO-8859-1");
+				c2 = new String(ptext, "UTF-16"); 
+				ptext = mapOfMostCommonChars.get(2).getBytes("ISO-8859-1");
+				c3 = new String(ptext, "UTF-16"); 
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			*/
+			
+			String debugReturn = avgAge + " " + r[1] + " " + r[0] + " " + mapOfMostCommonChars.get(0) + " " +  mapOfMostCommonChars.get(1) + " " +  mapOfMostCommonChars.get(2);
+			
+			return debugReturn;
 		}
 
 	}

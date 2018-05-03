@@ -1,4 +1,4 @@
-package com.musala.kb.solution.properties;
+package com.musala.kb.solution.properties.imp;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -9,18 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.musala.kb.solution.general.MapUtilis;
+import com.musala.kb.solution.properties.ReadEmployeesFilePropInterface;
+import com.musala.kb.solution.utilis.CalculateStuff;
 
-public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
+public class ReadEmployeesFilePropImp implements ReadEmployeesFilePropInterface {
 
 	private static final String propertiesFilePath = "res/config.properties";
 
 	// use this properties values to read/get/manipulate data in our txt file
 	private String separatorString = "";
 	private String sepratorKeyValueString = "";
-	private String keyNameString = "";
-	private String keyAgeString = "";
-	private String keyServiceLengthString = "";
+	// private String keyNameString = "";
+	// private String keyAgeString = "";
+	// private String keyServiceLengthString = "";
 
 	private int avgAgeOfEmployees = 0;
 	private float avgServiceOfEmployees = 0;
@@ -29,8 +30,8 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 	private ArrayList<String> names = new ArrayList<String>();
 	private ArrayList<String> ages = new ArrayList<String>();
 	private ArrayList<String> lenOfServices = new ArrayList<String>();
-
-	public ReadEmployeesFileImp() {
+	
+	public ReadEmployeesFilePropImp() {
 		readPropertyFile();
 	}
 
@@ -90,7 +91,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 	}
 
 	@Override
-	public void calculateAvgAge() {
+	public int calculateAvgAge() {
 
 		if (ages.isEmpty()) {
 			try {
@@ -99,6 +100,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return -1;
 		} else {
 
 			// avgAgeOfEmployees
@@ -109,13 +111,14 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 
 			avgAgeOfEmployees = sumAge / (ages.size());
 			System.out.println("avgAgeOfEmployees = " + avgAgeOfEmployees);
-
+			
+			return avgAgeOfEmployees;
 		}
 
 	}
 
 	@Override
-	public void calculateAvgServicesOfEmployees() {
+	public float calculateAvgServicesOfEmployees() {
 
 		if (lenOfServices.isEmpty()) {
 			try {
@@ -124,6 +127,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return -1;
 		} else {
 
 			// avgServiceOfEmployees
@@ -136,12 +140,13 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 			avgServiceOfEmployees = sumService / (lenOfServices.size());
 			System.out.println("avgServiceOfEmployees = " + avgServiceOfEmployees);
 
+			return avgServiceOfEmployees;
 		}
 
 	}
 
 	@Override
-	public void calculateMaxLengthOfService() {
+	public float calculateMaxLengthOfService() {
 
 		if (lenOfServices.isEmpty()) {
 			try {
@@ -150,6 +155,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return -1;
 		} else {
 
 			// maxLengthOfService
@@ -162,22 +168,26 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 
 			System.out.println("maxLengthOfService = " + maxLengthOfService);
 
+			return maxLengthOfService;
+			
 		}
 
 	}
 
 	@Override
-	public void calculateMostCommonChars() {
+	public String calculateMostCommonChars() {
 
 		String oneLongName = "";
 		for (String name : names) {
 			oneLongName = oneLongName + name;
 		}
 
-		List<String> mapOfMostCommonChars = MapUtilis.countCharactersInString(oneLongName, false);
+		List<String> mapOfMostCommonChars = CalculateStuff.countCharactersInString(oneLongName, false);
 		System.out.println("Top 1 char = " + mapOfMostCommonChars.get(0));
 		System.out.println("Top 2 char = " + mapOfMostCommonChars.get(1));
 		System.out.println("Top 3 char = " + mapOfMostCommonChars.get(2));
+		
+		return mapOfMostCommonChars.get(0) + " " + mapOfMostCommonChars.get(1) + " " + mapOfMostCommonChars.get(2);
 
 	}
 
@@ -198,9 +208,9 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileInterface {
 
 			separatorString = prop.getProperty("separator");
 			sepratorKeyValueString = prop.getProperty("separator-key-value");
-			keyNameString = prop.getProperty("key-name");
-			keyAgeString = prop.getProperty("key-age");
-			keyServiceLengthString = prop.getProperty("key-serviceLength");
+			// keyNameString = prop.getProperty("key-name");
+			// keyAgeString = prop.getProperty("key-age");
+			// keyServiceLengthString = prop.getProperty("key-serviceLength");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
 encoding//res/db.txt=UTF-8
+encoding//test/com/musala/kb/solution/general/test/GeneralSolutionTest.java=UTF-8
+encoding//test/com/musala/kb/solution/iterator/test/IteratorSolutionTest.java=UTF-8
+encoding//test/com/musala/kb/solution/properties/test/PropertiesSolutionTest.java=UTF-8
+encoding//test/com/musala/kb/solution/strategy/test/StrategySolutionTest.java=UTF-8

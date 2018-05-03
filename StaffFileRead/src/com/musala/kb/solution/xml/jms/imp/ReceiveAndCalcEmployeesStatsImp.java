@@ -10,7 +10,7 @@ import javax.jms.Session;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-import com.musala.kb.solution.general.MapUtilis;
+import com.musala.kb.solution.utilis.CalculateStuff;
 import com.musala.kb.solution.xml.jms.ReceiveAndCalcEmployeesStatsInterface;
 
 public class ReceiveAndCalcEmployeesStatsImp implements ReceiveAndCalcEmployeesStatsInterface {
@@ -34,7 +34,9 @@ public class ReceiveAndCalcEmployeesStatsImp implements ReceiveAndCalcEmployeesS
 		calculateMostCommonChars();
 	}
 
-	public void receiveDataFromJMS() {
+	public int receiveDataFromJMS() {
+
+		int status = -1;
 
 		// set up JMS listener ...
 		try {
@@ -58,9 +60,14 @@ public class ReceiveAndCalcEmployeesStatsImp implements ReceiveAndCalcEmployeesS
 
 			System.out.println("Listener is set ...");
 
+			status = 1;
+
 		} catch (Exception e) {
 			System.out.println(e);
+			status = -1;
 		}
+
+		return status;
 
 	}
 
@@ -149,7 +156,7 @@ public class ReceiveAndCalcEmployeesStatsImp implements ReceiveAndCalcEmployeesS
 			oneLongName = oneLongName + name;
 		}
 
-		List<String> mapOfMostCommonChars = MapUtilis.countCharactersInString(oneLongName, false);
+		List<String> mapOfMostCommonChars = CalculateStuff.countCharactersInString(oneLongName, false);
 		System.out.println("Top 1 char = " + mapOfMostCommonChars.get(0));
 		System.out.println("Top 2 char = " + mapOfMostCommonChars.get(1));
 		System.out.println("Top 3 char = " + mapOfMostCommonChars.get(2));

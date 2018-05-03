@@ -2,8 +2,10 @@ package com.musala.kb.main;
 
 import com.musala.kb.solution.general.ReadAndPrintFile;
 import com.musala.kb.solution.iterator.IteratorReadAndPrintFIle;
-import com.musala.kb.solution.strategy.impl.EmployeesStatsContext;
-import com.musala.kb.solution.strategy.impl.ReadEmployeesFileImp;
+import com.musala.kb.solution.properties.imp.EmployeesStatsPropContext;
+import com.musala.kb.solution.properties.imp.ReadEmployeesFilePropImp;
+import com.musala.kb.solution.strategy.imp.EmployeesStatsContext;
+import com.musala.kb.solution.strategy.imp.ReadEmployeesFileImp;
 import com.musala.kb.solution.xml.jms.imp.ReceiveAndCalcEmployeesStatsImp;
 import com.musala.kb.solution.xml.jms.imp.XmlAndJmsEmployeesStatsContext;
 
@@ -35,7 +37,9 @@ public class MainClass {
 		System.out.println("------------------------------------------");
 
 		// using property file + strategy pattern
-		new com.musala.kb.solution.properties.EmployeesStatsContext(filePath);
+		EmployeesStatsPropContext empStatsPropContext = new EmployeesStatsPropContext();
+		empStatsPropContext.setReadingEmployeesStrategy(new ReadEmployeesFilePropImp());
+		empStatsPropContext.startReading(filePath);
 		System.out.println("------------------------------------------");
 
 		// using - reading from xml file and jms

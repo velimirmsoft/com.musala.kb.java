@@ -1,4 +1,4 @@
-package com.musala.kb.solution.strategy.impl;
+package com.musala.kb.solution.strategy.imp;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,26 +6,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.musala.kb.solution.general.MapUtilis;
 import com.musala.kb.solution.strategy.ReadEmployeesFileStrategy;
+import com.musala.kb.solution.utilis.CalculateStuff;
 
 public class ReadEmployeesFileImp implements ReadEmployeesFileStrategy {
 
 	private int avgAgeOfEmployees = 0;
 	private float avgServiceOfEmployees = 0;
 	private float maxLengthOfService = 0;
-	
+
 	private ArrayList<String> names = new ArrayList<String>();
 	private ArrayList<String> ages = new ArrayList<String>();
 	private ArrayList<String> lenOfServices = new ArrayList<String>();
 
 	public ReadEmployeesFileImp() {
-		
+
 	}
 
 	@Override
 	public void readFileAndStoreInMemory(String filePath) {
-		
+
 		BufferedReader br = null;
 		FileReader fr = null;
 
@@ -79,8 +79,8 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileStrategy {
 	}
 
 	@Override
-	public void calculateAvgAge() {
-			
+	public int calculateAvgAge() {
+
 		if (ages.isEmpty()) {
 			try {
 				throw new Exception("error!");
@@ -88,6 +88,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileStrategy {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return -1;
 		} else {
 
 			// avgAgeOfEmployees
@@ -95,17 +96,18 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileStrategy {
 			for (String age : ages) {
 				sumAge = sumAge + Integer.parseInt(age);
 			}
-			
-			avgAgeOfEmployees = sumAge / (ages.size());	
+
+			avgAgeOfEmployees = sumAge / (ages.size());
 			System.out.println("avgAgeOfEmployees = " + avgAgeOfEmployees);
 
+			return avgAgeOfEmployees;
 		}
-	
+
 	}
 
 	@Override
-	public void calculateAvgServicesOfEmployees() {
-		
+	public float calculateAvgServicesOfEmployees() {
+
 		if (lenOfServices.isEmpty()) {
 			try {
 				throw new Exception("error!");
@@ -113,6 +115,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileStrategy {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return -1;
 		} else {
 
 			// avgServiceOfEmployees
@@ -121,17 +124,18 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileStrategy {
 				float c = Float.parseFloat(lenOfService);
 				sumService = sumService + c;
 			}
-			
+
 			avgServiceOfEmployees = sumService / (lenOfServices.size());
 			System.out.println("avgServiceOfEmployees = " + avgServiceOfEmployees);
 
+			return avgServiceOfEmployees;
 		}
-		
+
 	}
 
 	@Override
-	public void calculateMaxLengthOfService() {
-		
+	public float calculateMaxLengthOfService() {
+
 		if (lenOfServices.isEmpty()) {
 			try {
 				throw new Exception("error!");
@@ -139,6 +143,7 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileStrategy {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return -1;
 		} else {
 
 			// maxLengthOfService
@@ -148,27 +153,30 @@ public class ReadEmployeesFileImp implements ReadEmployeesFileStrategy {
 					maxLengthOfService = c;
 				}
 			}
-			
+
 			System.out.println("maxLengthOfService = " + maxLengthOfService);
 
+			return maxLengthOfService;
+
 		}
-		
+
 	}
 
 	@Override
-	public void calculateMostCommonChars() {
-		
+	public String calculateMostCommonChars() {
+
 		String oneLongName = "";
 		for (String name : names) {
 			oneLongName = oneLongName + name;
 		}
 
-		List<String> mapOfMostCommonChars = MapUtilis.countCharactersInString(oneLongName, false);
+		List<String> mapOfMostCommonChars = CalculateStuff.countCharactersInString(oneLongName, false);
 		System.out.println("Top 1 char = " + mapOfMostCommonChars.get(0));
 		System.out.println("Top 2 char = " + mapOfMostCommonChars.get(1));
 		System.out.println("Top 3 char = " + mapOfMostCommonChars.get(2));
 
-		
+		return mapOfMostCommonChars.get(0) + " " + mapOfMostCommonChars.get(1) + " " + mapOfMostCommonChars.get(2);
+
 	}
 
 }

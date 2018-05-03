@@ -4,7 +4,7 @@ public interface ReceiveAndCalcEmployeesStatsInterface {
 	
 	public static String topicToListen = "listen.to.employees.data";
 
-	public void receiveDataFromJMS();
+	public int receiveDataFromJMS();
 	
 	public void calculateAvgAge();
 	

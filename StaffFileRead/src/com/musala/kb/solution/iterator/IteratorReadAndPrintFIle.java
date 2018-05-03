@@ -3,7 +3,7 @@ package com.musala.kb.solution.iterator;
 import java.io.IOException;
 import java.util.List;
 
-import com.musala.kb.solution.general.MapUtilis;
+import com.musala.kb.solution.utilis.CalculateStuff;
 
 public class IteratorReadAndPrintFIle {
 
@@ -25,7 +25,7 @@ public class IteratorReadAndPrintFIle {
 		System.out.println("Iterator pattern solution ... \n");
 	}
 
-	public void readFileData(String filePath) {
+	public String readFileData(String filePath) {
 
 		int totalEmployees = 0;
 		int sumAge = 0;
@@ -77,6 +77,7 @@ public class IteratorReadAndPrintFIle {
 		} catch (NumberFormatException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "-1";
 		}
 
 		avgAgeOfEmployees = sumAge / (totalEmployees);
@@ -86,10 +87,14 @@ public class IteratorReadAndPrintFIle {
 		System.out.println("avgServiceOfEmployees = " + avgServiceOfEmployees);
 		System.out.println("maxLengthOfService = " + maxLengthOfService);
 
-		List<String> mapOfMostCommonChars = MapUtilis.countCharactersInString(oneLongName, false);
+		List<String> mapOfMostCommonChars = CalculateStuff.countCharactersInString(oneLongName, false);
 		System.out.println("Top 1 char = " + mapOfMostCommonChars.get(0));
 		System.out.println("Top 2 char = " + mapOfMostCommonChars.get(1));
 		System.out.println("Top 3 char = " + mapOfMostCommonChars.get(2));
+		
+		String debugReturn = avgAgeOfEmployees + " " + avgServiceOfEmployees + " " + maxLengthOfService + " " + mapOfMostCommonChars.get(0) + " " +  mapOfMostCommonChars.get(1) + " " +  mapOfMostCommonChars.get(2);
+		
+		return debugReturn;
 
 	}
 

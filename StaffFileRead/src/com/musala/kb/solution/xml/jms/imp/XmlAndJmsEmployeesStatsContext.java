@@ -3,6 +3,8 @@ package com.musala.kb.solution.xml.jms.imp;
 import com.musala.kb.solution.xml.jms.ReceiveAndCalcEmployeesStatsInterface;
 
 public class XmlAndJmsEmployeesStatsContext {
+	
+	public int status = -1;
 
 	private ReceiveAndCalcEmployeesStatsInterface readEmployeesFileStrategy;
 
@@ -17,7 +19,7 @@ public class XmlAndJmsEmployeesStatsContext {
 		System.out.println("XML and JMS solution ... \n");
 
 		// set listener to topic to get data via JMS
-		readEmployeesFileStrategy.receiveDataFromJMS();
+		status = readEmployeesFileStrategy.receiveDataFromJMS();
 
 	}
 

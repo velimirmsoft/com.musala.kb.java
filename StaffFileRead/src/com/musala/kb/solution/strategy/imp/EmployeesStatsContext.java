@@ -1,8 +1,10 @@
-package com.musala.kb.solution.strategy.impl;
+package com.musala.kb.solution.strategy.imp;
 
 import com.musala.kb.solution.strategy.ReadEmployeesFileStrategy;
 
 public class EmployeesStatsContext {
+	
+	public String debugOutput = "";
 
 	private ReadEmployeesFileStrategy readEmployeesFiles;
 
@@ -17,10 +19,13 @@ public class EmployeesStatsContext {
 		System.out.println("Strategy pattern solution ... \n");
 
 		readEmployeesFiles.readFileAndStoreInMemory(filePath);
-		readEmployeesFiles.calculateAvgAge();
-		readEmployeesFiles.calculateAvgServicesOfEmployees();
-		readEmployeesFiles.calculateMaxLengthOfService();
-		readEmployeesFiles.calculateMostCommonChars();
+		
+		int age = readEmployeesFiles.calculateAvgAge();
+		float avgSes = readEmployeesFiles.calculateAvgServicesOfEmployees();
+		float maxLen = readEmployeesFiles.calculateMaxLengthOfService();
+		String mostComm = readEmployeesFiles.calculateMostCommonChars();
+		
+		debugOutput = age + " " + avgSes + " " + maxLen + " " + mostComm;
 
 	}
 
