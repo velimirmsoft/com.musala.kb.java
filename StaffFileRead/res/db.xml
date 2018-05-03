@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="yes"?>
+
+<company>
+
+	<employee >
+		<name>Станислав Иванов Желязков</name>
+		<age>21</age>
+		<lengthOfService>3</lengthOfService>
+	</employee>
+
+	<employee >
+		<name>Константин Пламенов Лозанов</name>
+		<age>45</age>
+		<lengthOfService>8</lengthOfService>
+	</employee>
+
+	<employee >
+		<name>Петър Василев Кожухаров</name>
+		<age>32</age>
+		<lengthOfService>2</lengthOfService>
+	</employee>
+
+	<employee >
+		<name>Асен Петров Костадинов</name>
+		<age>35</age>
+		<lengthOfService>5.5</lengthOfService>
+	</employee>
+
+</company>
