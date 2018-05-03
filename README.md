@@ -8,6 +8,7 @@ Concepts:
 	+ Interfaces, Abstract Classes
 	+ Inheritance and Polymorphism
 	+ Modularity and Specification
+- Iterator & Strategy design patterns
 	
 - File reading and writing, Java try/catch with resources
 - Properties, XML and TXT file parsing
