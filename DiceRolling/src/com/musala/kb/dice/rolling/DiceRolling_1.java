@@ -1,8 +1,8 @@
 package com.musala.kb.dice.rolling;
 
-import com.musala.kb.dice.rolling.DiceRolling;
+import com.musala.kb.dice.rolling.DiceRollingInterface;
 
-public class DiceRolling_1 implements DiceRolling {
+public class DiceRolling_1 implements DiceRollingInterface {
 
 	@Override
 	public int rollDice() {

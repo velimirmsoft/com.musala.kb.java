@@ -2,7 +2,7 @@ package com.musala.kb.main;
 
 import java.util.Scanner;
 
-import com.musala.kb.dice.rolling.ContextDiceRolling;
+import com.musala.kb.dice.rolling.DiceRoller;
 import com.musala.kb.dice.rolling.DiceRolling_1;
 import com.musala.kb.dice.rolling.DiceRolling_2;
 
@@ -31,10 +31,10 @@ public class MainClass {
 
 	public static void main(String[] args) {
 
-		ContextDiceRolling contextDiceRolling_1 = new ContextDiceRolling();
+		DiceRoller contextDiceRolling_1 = new DiceRoller();
 		contextDiceRolling_1.setDiceRollingImplementation(new DiceRolling_1());
 
-		ContextDiceRolling contextDiceRolling_2 = new ContextDiceRolling();
+		DiceRoller contextDiceRolling_2 = new DiceRoller();
 		contextDiceRolling_2.setDiceRollingImplementation(new DiceRolling_2());
 
 		Scanner s = new Scanner(System.in);

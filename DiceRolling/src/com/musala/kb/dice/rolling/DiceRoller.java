@@ -1,10 +1,10 @@
 package com.musala.kb.dice.rolling;
 
-public class ContextDiceRolling {
+public class DiceRoller {
 
-	private DiceRolling dice;
+	private DiceRollingInterface dice;
 	
-	public void setDiceRollingImplementation(DiceRolling dice) {
+	public void setDiceRollingImplementation(DiceRollingInterface dice) {
 		this.dice = dice;
 	}
 	

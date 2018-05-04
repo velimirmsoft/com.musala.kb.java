@@ -3,7 +3,7 @@ package com.musala.kb.dice.rolling.test;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import com.musala.kb.dice.rolling.ContextDiceRolling;
+import com.musala.kb.dice.rolling.DiceRoller;
 import com.musala.kb.dice.rolling.DiceRolling_1;
 
 class ContextDiceRollingTest {
@@ -11,7 +11,7 @@ class ContextDiceRollingTest {
 	@Test	
 	void testRollTheDice() {
 		
-		ContextDiceRolling roll = new ContextDiceRolling();
+		DiceRoller roll = new DiceRoller();
 		roll.setDiceRollingImplementation(new DiceRolling_1());
 		
 		int r = roll.rollTheDice();

@@ -103,7 +103,7 @@ public class DiceRollingGameMultiplayerImp implements DiceRollingGameMultiplayer
 	}
 
 	@Override
-	public int gameStageLogicAndFlow(Scanner s) {
+	public void gameStageLogicAndFlow(Scanner s) {
 
 		s = null;
 		
@@ -124,7 +124,6 @@ public class DiceRollingGameMultiplayerImp implements DiceRollingGameMultiplayer
 				setPlayers(Integer.parseInt(input));
 			} else {
 				s.close();
-				return -1;
 			}
 
 			// input rounds
@@ -135,7 +134,6 @@ public class DiceRollingGameMultiplayerImp implements DiceRollingGameMultiplayer
 				setRounds(Integer.parseInt(input));
 			} else {
 				s.close();
-				return -1;
 			}
 
 			// input dices to roll
@@ -146,7 +144,6 @@ public class DiceRollingGameMultiplayerImp implements DiceRollingGameMultiplayer
 				setHowMuchDicesToRoll(Integer.parseInt(input));
 			} else {
 				s.close();
-				return -1;
 			}
 
 			// enter players names
@@ -202,11 +199,8 @@ public class DiceRollingGameMultiplayerImp implements DiceRollingGameMultiplayer
 
 			s.close();
 
-			return 1;
-
 		} catch (Exception e) {
 			e.printStackTrace();
-			return -1;
 		} finally {
 			s.close();
 		}

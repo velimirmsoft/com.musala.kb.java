@@ -22,6 +22,6 @@ public interface DiceRollingGameMultiplayer {
 	public int updatePlayerScore(int id, String playerName, int rolledTotal);
 	public int getHighscorePlayer();
 
-	public int gameStageLogicAndFlow(Scanner s);
+	public void gameStageLogicAndFlow(Scanner s);
 
 }
