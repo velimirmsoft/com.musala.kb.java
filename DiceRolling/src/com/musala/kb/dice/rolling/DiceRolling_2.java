@@ -6,10 +6,7 @@ public class DiceRolling_2 implements DiceRollingInterface {
 
 	@Override
 	public int rollDice() {
-		
-		int rolled = (int) (Math.random()*6) + 1;
-		
-		return rolled;
+		return (int) (Math.random()*6) + 1;
 	}
 	
 }
