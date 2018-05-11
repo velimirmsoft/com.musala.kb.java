@@ -9,7 +9,7 @@ public class ClassOne {
 
 	// here we define a generic method
 
-	public static <T> int countOddElementsInCollection(Collection<T> c, isOdd<T> check) {
+	public static <T> int countOddElementsInCollection(Collection<T> c, numOperations<T> check) {
 		int x = 0;
 		for (T element : c) {
 			if (check.isOddNum(element)) {
@@ -17,6 +17,13 @@ public class ClassOne {
 			}
 		}
 		return x;
+	}
+
+	public static <T> T[] swapThings(T[] a, int i, int j) {
+		T temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+		return a;
 	}
 
 }

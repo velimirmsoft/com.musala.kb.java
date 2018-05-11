@@ -9,7 +9,6 @@ Concepts:
 	+ Inheritance and Polymorphism
 	+ Modularity and Specification
 - Iterator & Strategy design patterns
-	
 - File reading and writing, Java try/catch with resources
 - Properties, XML and TXT file parsing
 - Console InputOutput streams
@@ -18,5 +17,7 @@ Concepts:
 - Algorithms
 - JUnit testing (simple tests & parameterzied tests)
   Diffrence between JUnit4 and JUnit5 -> found a explanation @ https://howtoprogram.xyz/2016/08/10/junit-5-vs-junit-4/
+- Anonymous declarations and Lambda Expression
+- Generic Types, Methods, Classes
 
 By Velimir Avramovski @MusalaSoft.
