@@ -3,7 +3,7 @@ package com.welle.generic.one;
 import java.util.Arrays;
 import java.util.Collection;
 
-// main class
+// main class - to test things ...
 
 public class MainClass {
 
