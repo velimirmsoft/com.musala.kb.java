@@ -1,8 +1,28 @@
 package com.welle.generic.one;
 
+import java.util.Collection;
 import java.util.List;
 
-public class exeNumOperations implements numOperations<Integer> {
+public class NumOperationsImp implements numOperations<Integer> {
+
+	// here we define a generic method
+
+	public static <T> int countOddElementsInCollection(Collection<T> c, numOperations<T> check) {
+		int x = 0;
+		for (T element : c) {
+			if (check.isOddNum(element)) {
+				x++;
+			}
+		}
+		return x;
+	}
+
+	public static <T> T[] swapThings(T[] a, int i, int j) {
+		T temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+		return a;
+	}
 
 	@Override
 	public boolean isOddNum(Integer num) {
@@ -28,7 +48,7 @@ public class exeNumOperations implements numOperations<Integer> {
 			if (((Integer) maxElem).compareTo((Integer) list.get(begin)) < 0)
 				maxElem = list.get(begin);
 		return maxElem;
-		
+
 	}
 
 }
