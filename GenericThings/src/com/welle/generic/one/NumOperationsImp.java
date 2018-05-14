@@ -31,13 +31,6 @@ public class NumOperationsImp implements numOperations<Integer> {
 		return false;
 	}
 
-	@Override
-	public <T> T[] swap(T[] a, int i, int j) {
-		T temp = a[i];
-		a[i] = a[j];
-		a[j] = temp;
-		return a;
-	}
 
 	@Override
 	public <E> E max(List<E> list, int begin, int end) {
@@ -49,6 +42,14 @@ public class NumOperationsImp implements numOperations<Integer> {
 				maxElem = list.get(begin);
 		return maxElem;
 
+	}
+
+	@Override
+	public Integer[] swap(Integer[] a, int i, int j) {
+		Integer temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+		return a;
 	}
 
 }

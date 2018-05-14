@@ -11,7 +11,7 @@ public interface numOperations<T> {
 	// or define generic method
 	// public <T> boolean isOddNumGen(T num);
 	
-	public <T> T[] swap(T[] a, int i, int j);
+	public T[] swap(T[] a, int i, int j);
 	
 	public <E> E max(List<E> list, int begin, int end);
 
