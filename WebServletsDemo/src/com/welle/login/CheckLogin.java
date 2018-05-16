@@ -1,7 +1,6 @@
 package com.welle.login;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -32,14 +31,14 @@ public class CheckLogin extends HttpServlet {
 		context = config.getServletContext();
 
 		// getting the value of the initialization parameter and printing it
-		String driverName = context.getInitParameter("parName");
+		// String driverName = context.getInitParameter("parName");
 		// System.out.println("We read this from our web.xml as parapetar -> parName = "
 		// + driverName);
 
 	}
 
 	public void destroy() {
-
+		System.out.println("servlet on destroy! - CheckLogin");
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,17 +47,13 @@ public class CheckLogin extends HttpServlet {
 		// check if we actually have a previous cookie
 		Cookie cks[] = request.getCookies();
 		for (int i = 0; i < cks.length; i++) {
-			System.out.println("cookie = " + cks[i].getName() + " " + cks[i].getValue()); // printing name and value of
-																							// cookie
+			// System.out.println("cookie = " + cks[i].getName() + " " + cks[i].getValue());
+			// if we got the cookie redirect to MyAppContent
 			if (cks[i].getValue().equals("123")) {
 				RequestDispatcher rd = request.getRequestDispatcher("MyAppContent");
 				rd.forward(request, response);
 			}
 		}
-
-		// set response type
-		response.setContentType("text/html");
-		PrintWriter pw = response.getWriter();
 
 		String n = request.getParameter("userName");
 		String p = request.getParameter("userPass");
@@ -68,6 +63,7 @@ public class CheckLogin extends HttpServlet {
 
 				// set cookie ?
 				Cookie ck = new Cookie("pass", "" + p); // creating cookie object
+				// 60 secs our cookie will live
 				ck.setMaxAge(60);
 				response.addCookie(ck); // adding cookie in the response
 
@@ -75,7 +71,6 @@ public class CheckLogin extends HttpServlet {
 				rd.forward(request, response);
 
 			} else {
-				pw.print("Sorry UserName or Password Error!");
 				RequestDispatcher rd = request.getRequestDispatcher("/error.html");
 				rd.include(request, response);
 			}

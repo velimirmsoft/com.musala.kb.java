@@ -29,18 +29,22 @@ public class MyAppContent extends HttpServlet {
 		context = config.getServletContext();
 
 	}
+	
+	public void destroy() {
+		System.out.println("servlet on destroy! - MyAppContent");
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.getWriter().append("You are in our APP. Served at: ").append(request.getContextPath());
 		
-		String n = (String) context.getAttribute("whoToKill");
+		// String n = (String) context.getAttribute("whoToKill");
 		// System.out.println("We got this from another SERVLET! -> whoToKill = " + n);
 
 		// check if we actually have a previous cookie
 		Cookie cks[] = request.getCookies();
 		for (int i = 0; i < cks.length; i++) {
-			System.out.println("cookie = " + cks[i].getName() + " " + cks[i].getValue()); // printing name and value of																			// cookie
+			System.out.println("cookie = " + cks[i].getName() + " " + cks[i].getValue());		
 		}
 		
 		System.out.println("--------------------------------------------");
