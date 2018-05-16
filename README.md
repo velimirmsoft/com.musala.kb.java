@@ -19,5 +19,6 @@ Concepts:
   Diffrence between JUnit4 and JUnit5 -> found a explanation @ https://howtoprogram.xyz/2016/08/10/junit-5-vs-junit-4/
 - Anonymous declarations and Lambda Expression
 - Generic Types, Methods, Classes
+- Servlets and Web Applications.
 
 By Velimir Avramovski @MusalaSoft.
