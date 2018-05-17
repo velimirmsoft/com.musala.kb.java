@@ -4,4 +4,4 @@ Using:
 
 - Java
 - Servlets
-- Oracle Database 11g - EX
+- Oracle Database 11g - XE

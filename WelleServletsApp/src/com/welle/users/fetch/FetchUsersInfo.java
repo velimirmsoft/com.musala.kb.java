@@ -39,7 +39,7 @@ public class FetchUsersInfo extends HttpServlet {
 			out.print("<caption>Result:</caption>");
 
 			ResultSet rs = ps.executeQuery();
-			
+
 			ResultSetMetaData rsmd = rs.getMetaData();
 
 			// printing columns
@@ -52,17 +52,8 @@ public class FetchUsersInfo extends HttpServlet {
 
 			// the result per row -> coloum
 			while (rs.next()) {
-				out.print(
-						"<tr><td>" 
-						+ rs.getString(1) 
-						+ "</td><td>" 
-						+ rs.getString(2) 
-						+ "</td><td>" 
-						+ rs.getString(3)
-						+ "</td><td>" 
-						+ rs.getString(4) 
-						+ "</td></tr>"
-						);
+				out.print("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getString(3) + "</td><td>" + rs.getString(4)
+				+ "</td>" + "<td>" + rs.getString(5) + "</td></tr>");
 			}
 
 			out.print("</table>");

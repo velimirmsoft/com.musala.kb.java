@@ -31,9 +31,8 @@ public class CheckLogin extends HttpServlet {
 		context = config.getServletContext();
 
 		// getting the value of the initialization parameter and printing it
-		// String driverName = context.getInitParameter("parName");
-		// System.out.println("We read this from our web.xml as parapetar -> parName = "
-		// + driverName);
+		String driverName = context.getInitParameter("parName");
+		System.out.println("We read this from our web.xml as parapetar -> parName = " + driverName);
 
 	}
 
@@ -47,7 +46,7 @@ public class CheckLogin extends HttpServlet {
 		// check if we actually have a previous cookie
 		Cookie cks[] = request.getCookies();
 		for (int i = 0; i < cks.length; i++) {
-			// System.out.println("cookie = " + cks[i].getName() + " " + cks[i].getValue());
+			System.out.println("cookie = " + cks[i].getName() + " " + cks[i].getValue());
 			// if we got the cookie redirect to MyAppContent
 			if (cks[i].getValue().equals("123")) {
 				RequestDispatcher rd = request.getRequestDispatcher("MyAppContent");

@@ -1,1 +1,1 @@
-Here do a little example of servlets and its features.
+Here we do a little example of servlets and its features, like attributes, sessions, cookies, reading from web.xml as config.

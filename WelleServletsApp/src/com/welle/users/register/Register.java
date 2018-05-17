@@ -1,10 +1,16 @@
 package com.welle.users.register;
 
-import java.io.*;
-import java.sql.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/Register")
 public class Register extends HttpServlet {
@@ -27,12 +33,13 @@ public class Register extends HttpServlet {
 
 			// System.out.println("" + con);
 
-			PreparedStatement ps = con.prepareStatement("insert into registeruser values(?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement("insert into registeruser values(?,?,?,?,?)");
 
-			ps.setString(1, n);
-			ps.setString(2, p);
-			ps.setString(3, e);
-			ps.setString(4, c);
+			ps.setInt(1, 0);
+			ps.setString(2, n);
+			ps.setString(3, p);
+			ps.setString(4, e);
+			ps.setString(5, c);
 
 			int i = ps.executeUpdate();
 			if (i > 0)

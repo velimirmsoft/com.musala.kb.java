@@ -38,8 +38,8 @@ public class MyAppContent extends HttpServlet {
 			throws ServletException, IOException {
 		response.getWriter().append("You are in our APP. Served at: ").append(request.getContextPath());
 		
-		// String n = (String) context.getAttribute("whoToKill");
-		// System.out.println("We got this from another SERVLET! -> whoToKill = " + n);
+		String n = (String) context.getAttribute("whoToKill");
+		System.out.println("We got this from another SERVLET! -> whoToKill = " + n);
 
 		// check if we actually have a previous cookie
 		Cookie cks[] = request.getCookies();
