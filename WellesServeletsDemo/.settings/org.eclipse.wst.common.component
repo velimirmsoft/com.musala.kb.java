@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="WebServletsDemo-0.0.1-SNAPSHOT">
-        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+    <wb-module deploy-name="WellesServeletsDemo">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/WebServletsDemo/build/classes"/>
-        <property name="context-root" value="WebServletsDemo"/>
+        <property name="java-output-path" value="/WellesServeletsDemo/build/classes"/>
+        <property name="context-root" value="WellesServeletsDemo"/>
     </wb-module>
 </project-modules>

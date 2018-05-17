@@ -1,0 +1,1 @@
+Here do a little example of servlets and its features.
