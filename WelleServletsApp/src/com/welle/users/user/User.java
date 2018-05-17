@@ -1,9 +1,17 @@
-package com.welle.users.infos;
+package com.welle.users.user;
 
 public class User {
-	
+
 	private int id;
-	private String name, password;
+	private String name, password, email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public int getId() {
 		return id;

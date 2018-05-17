@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.welle.constant.fields.Fields;
+
 @WebServlet("/FetchUsersInfo")
 public class FetchUsersInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,9 +33,9 @@ public class FetchUsersInfo extends HttpServlet {
 		try {
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "WELLE", "admin");
+			Connection con = DriverManager.getConnection(Fields.jdbcToOracleDb, Fields.DbUser, Fields.DbPass);
 
-			PreparedStatement ps = con.prepareStatement("select * from registeruser");
+			PreparedStatement ps = con.prepareStatement("select * from " + Fields.DbName);
 
 			out.print("<table width=50% border=1>");
 			out.print("<caption>Result:</caption>");

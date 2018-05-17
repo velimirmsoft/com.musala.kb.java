@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.welle.constant.fields.Fields;
+
 @WebServlet("/Register")
 public class Register extends HttpServlet {
 
@@ -29,11 +31,11 @@ public class Register extends HttpServlet {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "WELLE", "admin");
+			Connection con = DriverManager.getConnection(Fields.jdbcToOracleDb, Fields.DbUser, Fields.DbPass);
 
 			// System.out.println("" + con);
 
-			PreparedStatement ps = con.prepareStatement("insert into registeruser values(?,?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement("insert into " + Fields.DbName + " values(?,?,?,?,?)");
 
 			ps.setInt(1, 0);
 			ps.setString(2, n);
@@ -44,6 +46,7 @@ public class Register extends HttpServlet {
 			int i = ps.executeUpdate();
 			if (i > 0)
 				out.print("You are successfully registered ...");
+				out.print("<a href='index.html'></a>");
 
 		} catch (Exception e2) {
 			System.out.println(e2);

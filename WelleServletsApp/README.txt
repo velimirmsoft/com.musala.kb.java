@@ -4,4 +4,8 @@ Using:
 
 - Java
 - Servlets
+	- Basic HTTP Servlets
+	- Listeners
 - Oracle Database 11g - XE
+	- Create Table
+	- Get and Put to/from table
