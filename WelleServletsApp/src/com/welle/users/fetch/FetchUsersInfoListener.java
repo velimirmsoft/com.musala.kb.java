@@ -27,15 +27,19 @@ public class FetchUsersInfoListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent sce) {
 
+		// init our singleton class for constant parameters
+		Fields fields = Fields.getFieldsInstance();
+
 		System.out.println("Servlet listener is fired!");
 
 		ArrayList<User> list = new ArrayList<User>();
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(Fields.jdbcToOracleDb, Fields.DbUser, Fields.DbPass);
+			Connection con = DriverManager.getConnection(fields.getJdbcToOracleDb(), fields.getDbUser(),
+					fields.getDbPass());
 
-			PreparedStatement ps = con.prepareStatement("select * from " + Fields.DbName);
+			PreparedStatement ps = con.prepareStatement("select * from " + fields.getDbName());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				User u = new User();

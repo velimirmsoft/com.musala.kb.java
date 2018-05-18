@@ -28,10 +28,13 @@ public class UploadFile extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// init our singleton class for constant parameters
+		Fields fields = Fields.getFieldsInstance();
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
-		MultipartRequest m = new MultipartRequest(request, Fields.UpDownFolder);
+		MultipartRequest m = new MultipartRequest(request, fields.getUpDownFolder());
 		out.print("successfully uploaded");
 
 	}

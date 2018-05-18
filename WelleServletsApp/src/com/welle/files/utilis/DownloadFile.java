@@ -23,11 +23,14 @@ public class DownloadFile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// init our singleton class for constant parameters
+		Fields fields = Fields.getFieldsInstance();
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
 		String filename = "\\pom.xml";
-		String filepath = Fields.UpDownFolder;
+		String filepath = fields.getUpDownFolder();
 		response.setContentType("APPLICATION/OCTET-STREAM");
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
 

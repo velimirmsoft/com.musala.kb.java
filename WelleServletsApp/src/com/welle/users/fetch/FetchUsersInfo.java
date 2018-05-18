@@ -27,15 +27,19 @@ public class FetchUsersInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// init our singleton class for constant parameters
+		Fields fields = Fields.getFieldsInstance();
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
 		try {
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(Fields.jdbcToOracleDb, Fields.DbUser, Fields.DbPass);
+			Connection con = DriverManager.getConnection(fields.getJdbcToOracleDb(), fields.getDbUser(),
+					fields.getDbPass());
 
-			PreparedStatement ps = con.prepareStatement("select * from " + Fields.DbName);
+			PreparedStatement ps = con.prepareStatement("select * from " + fields.getDbName());
 
 			out.print("<table width=50% border=1>");
 			out.print("<caption>Result:</caption>");
@@ -54,8 +58,8 @@ public class FetchUsersInfo extends HttpServlet {
 
 			// the result per row -> coloum
 			while (rs.next()) {
-				out.print("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getString(3) + "</td><td>" + rs.getString(4)
-				+ "</td>" + "<td>" + rs.getString(5) + "</td></tr>");
+				out.print("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getString(3)
+						+ "</td><td>" + rs.getString(4) + "</td>" + "<td>" + rs.getString(5) + "</td></tr>");
 			}
 
 			out.print("</table>");

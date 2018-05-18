@@ -21,6 +21,9 @@ public class Register extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		// init our singleton class for constant parameters
+		Fields fields = Fields.getFieldsInstance();
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
@@ -31,11 +34,11 @@ public class Register extends HttpServlet {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(Fields.jdbcToOracleDb, Fields.DbUser, Fields.DbPass);
+			Connection con = DriverManager.getConnection(fields.getJdbcToOracleDb(), fields.getDbUser(), fields.getDbPass());
 
 			// System.out.println("" + con);
 
-			PreparedStatement ps = con.prepareStatement("insert into " + Fields.DbName + " values(?,?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement("insert into " + fields.getDbName() + " values(?,?,?,?,?)");
 
 			ps.setInt(1, 0);
 			ps.setString(2, n);
@@ -46,7 +49,7 @@ public class Register extends HttpServlet {
 			int i = ps.executeUpdate();
 			if (i > 0)
 				out.print("You are successfully registered ...");
-				out.print("<a href='index.html'></a>");
+			out.print("<a href='index.html'></a>");
 
 		} catch (Exception e2) {
 			System.out.println(e2);

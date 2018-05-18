@@ -11,13 +11,18 @@ public class LoginValidate {
 
 	public static boolean validate(String name, String pass) {
 
+		// init our singleton class for constant parameters
+		Fields fields = Fields.getFieldsInstance();
+
 		boolean status = false;
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(Fields.jdbcToOracleDb, Fields.DbUser, Fields.DbPass);
+			Connection con = DriverManager.getConnection(fields.getJdbcToOracleDb(), fields.getDbUser(),
+					fields.getDbPass());
 
-			PreparedStatement ps = con.prepareStatement("select * from " + Fields.DbName + " where name=? and pass=?");
+			PreparedStatement ps = con
+					.prepareStatement("select * from " + fields.getDbName() + " where name=? and pass=?");
 			ps.setString(1, name);
 			ps.setString(2, pass);
 
