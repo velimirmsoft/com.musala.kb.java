@@ -26,7 +26,7 @@ public class FetchUsersInfoListener implements ServletContextListener {
 	}
 
 	public void contextInitialized(ServletContextEvent sce) {
-		
+
 		System.out.println("Servlet listener is fired!");
 
 		ArrayList<User> list = new ArrayList<User>();
@@ -42,6 +42,8 @@ public class FetchUsersInfoListener implements ServletContextListener {
 				u.setId(rs.getInt(1));
 				u.setName(rs.getString(2));
 				u.setPassword(rs.getString(3));
+				u.setEmail(rs.getString(4));
+				u.setCountry(rs.getString(5));
 				list.add(u);
 			}
 			con.close();

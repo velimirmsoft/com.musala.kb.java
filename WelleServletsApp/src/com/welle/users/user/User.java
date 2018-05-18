@@ -3,7 +3,15 @@ package com.welle.users.user;
 public class User {
 
 	private int id;
-	private String name, password, email;
+	private String name, password, email, country;
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	public String getEmail() {
 		return email;

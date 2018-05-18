@@ -1,24 +1,20 @@
-package com.welle.users.fetch;
+package com.welle.users.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.List;
 
-import javax.servlet.ServletContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.welle.users.user.User;
-
-@WebServlet("/WriteFetchedUserInfos")
-public class WriteFetchedUserInfos extends HttpServlet {
+@WebServlet("/Login")
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public WriteFetchedUserInfos() {
+	public Login() {
 		super();
 	}
 
@@ -28,13 +24,17 @@ public class WriteFetchedUserInfos extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
-		ServletContext context = getServletContext();
-		List<User> list =  (List<User>) context.getAttribute("data");
+		String n = request.getParameter("username");
+		String p = request.getParameter("userpass");
 
-		Iterator<User> itr = list.iterator();
-		while (itr.hasNext()) {
-			User u = (User) itr.next();
-			out.print("<br>" + u.getId() + " " + u.getName() + " " + u.getPassword());
+		if (LoginValidate.validate(n, p)) {
+			// RequestDispatcher rd = request.getRequestDispatcher("servlet2");
+			// rd.forward(request, response);
+			out.print("You are logged in, congratz!");
+		} else {
+			out.print("Sorry username or password error");
+			RequestDispatcher rd = request.getRequestDispatcher("index.html");
+			rd.include(request, response);
 		}
 
 		out.close();
