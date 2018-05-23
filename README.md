@@ -27,5 +27,10 @@ Concepts:
 		- Factory
 		- Builder
 		- Prototype (clone)
+	- Behavioral
+		- Template 
+		- Mediator 
+		- Chain of Responsibility
+		- Strategy
 
 By Velimir Avramovski @MusalaSoft.
