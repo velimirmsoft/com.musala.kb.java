@@ -32,5 +32,6 @@ Concepts:
 		- Mediator 
 		- Chain of Responsibility
 		- Strategy
+		- State
 
 By Velimir Avramovski @MusalaSoft.
