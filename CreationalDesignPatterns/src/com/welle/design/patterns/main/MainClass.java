@@ -3,6 +3,7 @@ package com.welle.design.patterns.main;
 import com.welle.design.pattern.factory.Computer;
 import com.welle.design.pattern.builder.*;
 import com.welle.design.pattern.factory.ComputerFactory;
+import com.welle.design.pattern.prototype.Employee;
 import com.welle.design.pattern.singleton.GodSingletonInstance;
 
 public class MainClass {
@@ -44,6 +45,18 @@ public class MainClass {
 		buildComputer.OurRAM();
 		buildComputer.isBluetoothEnabled();
 		buildComputer.isGraphicsCardEnabled();
+
+		print("Prototype ...");
+
+		// prototype pattern
+
+		Employee empls = new Employee();
+		empls.addEmployee("welle");
+		empls.addEmployee("petko");
+		empls.addEmployee("stanko");
+		empls.printEmployees();
+		Employee empls_clone = (Employee) empls.clone();
+		empls_clone.printEmployees();
 
 		// end
 		print("done!");

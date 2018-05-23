@@ -26,5 +26,6 @@ Concepts:
 		- Singleton
 		- Factory
 		- Builder
+		- Prototype (clone)
 
 By Velimir Avramovski @MusalaSoft.
