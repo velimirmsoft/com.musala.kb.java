@@ -2,6 +2,11 @@ package com.welle.design.patterns.main;
 
 import com.welle.design.pattern.chain.ATMDispenseChain;
 import com.welle.design.pattern.chain.Currency;
+import com.welle.design.pattern.iterator.Channel;
+import com.welle.design.pattern.iterator.ChannelCollection;
+import com.welle.design.pattern.iterator.ChannelCollectionImpl;
+import com.welle.design.pattern.iterator.ChannelIterator;
+import com.welle.design.pattern.iterator.ChannelTypeEnum;
 import com.welle.design.pattern.mediator.ChatMediator;
 import com.welle.design.pattern.mediator.ChatMediatorImpl;
 import com.welle.design.pattern.mediator.User;
@@ -93,6 +98,25 @@ public class MainClass {
 			sum = sum + item.accept(visitor);
 		}
 		System.out.println("Total Cost = " + sum);
+
+		print("Iterator ...");
+
+		// Iterator pattern = Iterable + iterator + hasNext, next ...
+		ChannelCollection channels = new ChannelCollectionImpl();
+		channels.addChannel(new Channel(98.5, ChannelTypeEnum.ENGLISH));
+		channels.addChannel(new Channel(99.5, ChannelTypeEnum.HINDI));
+		channels.addChannel(new Channel(100.5, ChannelTypeEnum.FRENCH));
+		channels.addChannel(new Channel(101.5, ChannelTypeEnum.ENGLISH));
+		channels.addChannel(new Channel(102.5, ChannelTypeEnum.HINDI));
+		channels.addChannel(new Channel(103.5, ChannelTypeEnum.FRENCH));
+		channels.addChannel(new Channel(104.5, ChannelTypeEnum.ENGLISH));
+		channels.addChannel(new Channel(105.5, ChannelTypeEnum.HINDI));
+		channels.addChannel(new Channel(106.5, ChannelTypeEnum.FRENCH));
+		ChannelIterator baseIterator = channels.iterator(ChannelTypeEnum.ALL);
+		while (baseIterator.hasNext()) {
+			Channel c = baseIterator.next();
+			System.out.println(c.toString());
+		}
 
 		// end
 		print("done!");

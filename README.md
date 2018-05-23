@@ -33,5 +33,9 @@ Concepts:
 		- Chain of Responsibility
 		- Strategy
 		- State
+		- Visitor
+		- Iterator
+	- Structural
+		- Adapter
 
 By Velimir Avramovski @MusalaSoft.
