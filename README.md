@@ -37,5 +37,6 @@ Concepts:
 		- Iterator
 	- Structural
 		- Adapter
+		- Decorator
 
 By Velimir Avramovski @MusalaSoft.
