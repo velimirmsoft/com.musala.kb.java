@@ -21,5 +21,9 @@ Concepts:
 - Anonymous declarations and Lambda Expression
 - Generic Types, Methods, Classes
 - Servlets and Web Applications.
+- Creational Design Patterns
+	- Singleton
+	- Factory
+	- Builder
 
 By Velimir Avramovski @MusalaSoft.
