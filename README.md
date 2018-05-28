@@ -38,5 +38,7 @@ Concepts:
 	- Structural
 		- Adapter
 		- Decorator
+		- Facade
+		- Flyweight
 
 By Velimir Avramovski @MusalaSoft.

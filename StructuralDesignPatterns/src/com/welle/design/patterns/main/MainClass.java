@@ -7,6 +7,8 @@ import com.welle.design.pattern.decorator.BasicCar;
 import com.welle.design.pattern.decorator.Car;
 import com.welle.design.pattern.decorator.LuxuryCar;
 import com.welle.design.pattern.decorator.SportsCar;
+import com.welle.design.pattern.facade.HelperFacade;
+import com.welle.design.pattern.flyweight.DrawingClient;
 
 public class MainClass {
 
@@ -39,6 +41,20 @@ public class MainClass {
 		luxuryCar.assemble();
 		Car allInOne = new LuxuryCar(new SportsCar(new BasicCar()));
 		allInOne.assemble();
+
+		print("Facade ...");
+
+		// Facade pattern
+		// generating MySql HTML report and Oracle PDF report using Facade
+		HelperFacade.generateReport(HelperFacade.DBTypes.MYSQL, HelperFacade.ReportTypes.HTML, "testTable");
+		HelperFacade.generateReport(HelperFacade.DBTypes.ORACLE, HelperFacade.ReportTypes.PDF, "testTable");
+
+		print("Flyweight ...");
+
+		// Flyweight pattern
+
+		DrawingClient d = new DrawingClient(500, 600);
+		d.drawThings();
 
 		// end
 		print("done!");
