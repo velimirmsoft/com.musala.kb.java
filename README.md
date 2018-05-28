@@ -41,6 +41,6 @@ Concepts:
 		- Facade
 		- Flyweight
 		- Composite
-		- Bridge
+		- Bridge - decouple interfaces
 
 By Velimir Avramovski @MusalaSoft.
