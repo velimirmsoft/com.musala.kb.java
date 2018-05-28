@@ -3,6 +3,10 @@ package com.welle.design.patterns.main;
 import com.welle.design.pattern.adapter.SocketAdapter;
 import com.welle.design.pattern.adapter.SocketAdapterImpl;
 import com.welle.design.pattern.adapter.Volt;
+import com.welle.design.pattern.composite.Circle;
+import com.welle.design.pattern.composite.Drawing;
+import com.welle.design.pattern.composite.Shape;
+import com.welle.design.pattern.composite.Triangle;
 import com.welle.design.pattern.decorator.BasicCar;
 import com.welle.design.pattern.decorator.Car;
 import com.welle.design.pattern.decorator.LuxuryCar;
@@ -55,6 +59,17 @@ public class MainClass {
 
 		DrawingClient d = new DrawingClient(500, 600);
 		d.drawThings();
+		
+		print("Composite ...");
+		
+		// Composite - the idea is to have 'part whole hierarchy'
+		Drawing dSpahes = new Drawing();
+		
+		Shape sC = new Circle();
+		Shape sT = new Triangle();
+		dSpahes.addShape(sC);
+		dSpahes.addShape(sT);
+		dSpahes.draw("RED");
 
 		// end
 		print("done!");
