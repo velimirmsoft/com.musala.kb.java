@@ -40,5 +40,6 @@ Concepts:
 		- Decorator
 		- Facade
 		- Flyweight
+		- Composite
 
 By Velimir Avramovski @MusalaSoft.
