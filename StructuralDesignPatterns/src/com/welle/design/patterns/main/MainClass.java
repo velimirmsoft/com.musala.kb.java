@@ -3,6 +3,10 @@ package com.welle.design.patterns.main;
 import com.welle.design.pattern.adapter.SocketAdapter;
 import com.welle.design.pattern.adapter.SocketAdapterImpl;
 import com.welle.design.pattern.adapter.Volt;
+import com.welle.design.pattern.bridge.CircleShape;
+import com.welle.design.pattern.bridge.GreenColor;
+import com.welle.design.pattern.bridge.RedColor;
+import com.welle.design.pattern.bridge.TriangleShape;
 import com.welle.design.pattern.composite.Circle;
 import com.welle.design.pattern.composite.Drawing;
 import com.welle.design.pattern.composite.Shape;
@@ -59,17 +63,27 @@ public class MainClass {
 
 		DrawingClient d = new DrawingClient(500, 600);
 		d.drawThings();
-		
+
 		print("Composite ...");
-		
+
 		// Composite - the idea is to have 'part whole hierarchy'
 		Drawing dSpahes = new Drawing();
-		
+
 		Shape sC = new Circle();
 		Shape sT = new Triangle();
 		dSpahes.addShape(sC);
 		dSpahes.addShape(sT);
 		dSpahes.draw("RED");
+
+		print("Bridge ...");
+
+		// Bridge pattern - the point of this pattern is to decouple
+		// interfaces, as show in this example, we decouple two interfaces
+		com.welle.design.pattern.bridge.Shape circleShape = new CircleShape(new RedColor());
+		circleShape.sayMyShapeAndColor();
+
+		com.welle.design.pattern.bridge.Shape triangleShape = new TriangleShape(new GreenColor());
+		triangleShape.sayMyShapeAndColor();
 
 		// end
 		print("done!");

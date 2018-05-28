@@ -41,5 +41,6 @@ Concepts:
 		- Facade
 		- Flyweight
 		- Composite
+		- Bridge
 
 By Velimir Avramovski @MusalaSoft.
