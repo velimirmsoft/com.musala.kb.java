@@ -28,25 +28,14 @@ public class Word {
 
 	@Override
 	public boolean equals(Object obj) {
-
-		// this method is used when Collection is comparing Objects
-		// so when we call '.contains' on our list this method will be called
-		// and it checks for duplicates
-
 		if (!(obj instanceof Word))
 			return false;
-
 		Word testWord = (Word) obj;
-
-		// ako imame takov zbor, znaci ne treba da se kreira nov object vo
-		// hasSetot pa zatoa vracame true
-
 		if (testWord.getWord().equals(this.getWord())) {
 			return true;
 		} else {
 			return false;
 		}
-
 	}
 
 	@Override

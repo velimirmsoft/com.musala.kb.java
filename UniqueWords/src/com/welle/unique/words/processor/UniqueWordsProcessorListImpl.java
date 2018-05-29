@@ -3,9 +3,10 @@ package com.welle.unique.words.processor;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import com.welle.settings.FilePathsAndConstants;
 import com.welle.word.Word;
 
-public class UniqueWordsProcessorImpl extends UniqueWordsProcessor {
+public class UniqueWordsProcessorListImpl extends UniqueWordsProcessor {
 
 	@Override
 	public void addUniqueWord(String word) {
@@ -30,7 +31,7 @@ public class UniqueWordsProcessorImpl extends UniqueWordsProcessor {
 	}
 
 	@Override
-	public Word searchForWordInMyList(String word) {
+	public Word searchForWord(String word) {
 		for (Word w : wordsList) {
 			if (w.getWord().equals(word))
 				return w;
@@ -39,7 +40,7 @@ public class UniqueWordsProcessorImpl extends UniqueWordsProcessor {
 	}
 
 	@Override
-	public ArrayList<Word> sortAndOrderByCountsWords(int limitOfOccurences, OrderType orderType) {
+	public ArrayList<Word> sortAndOrderByCountsWords(int limitOfOccurences, FilePathsAndConstants.OrderType orderType) {
 		ArrayList<Word> newList = new ArrayList<Word>();
 		for (Word w : wordsList) {
 			if (w.getCount() >= limitOfOccurences)
@@ -89,6 +90,11 @@ public class UniqueWordsProcessorImpl extends UniqueWordsProcessor {
 
 		});
 		return newList;
+	}
+
+	@Override
+	public void clearWords() {
+		wordsList.clear();
 	}
 
 }

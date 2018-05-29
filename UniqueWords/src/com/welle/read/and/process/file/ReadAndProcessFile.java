@@ -5,23 +5,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.welle.settings.FilesAndPaths;
+import com.welle.settings.FilePathsAndConstants;
 import com.welle.unique.words.processor.UniqueWordsProcessor;
-import com.welle.unique.words.processor.UniqueWordsProcessorImpl;
-import com.welle.unique.words.processor.UniqueWordsProcessor.OrderType;
 import com.welle.word.Word;
 
 public class ReadAndProcessFile {
 
 	private UniqueWordsProcessor wordProcessor;
-	private FilesAndPaths constants = new FilesAndPaths();
+	private FilePathsAndConstants constants = new FilePathsAndConstants();
 
-	public ReadAndProcessFile() {
-		wordProcessor = new UniqueWordsProcessorImpl();
+	public ReadAndProcessFile(UniqueWordsProcessor whichImpl) {
+		wordProcessor = whichImpl;
 	}
 
-	public ReadAndProcessFile(String filePath) {
-		wordProcessor = new UniqueWordsProcessorImpl();
+	public ReadAndProcessFile(UniqueWordsProcessor whichImpl, String filePath) {
+		wordProcessor = whichImpl;
 		constants.setFileToRead(filePath);
 	}
 
@@ -36,8 +34,8 @@ public class ReadAndProcessFile {
 					// we need to remove invalid characters
 					w = w.replaceAll("\\W+", "");
 					// System.out.println("working on = " + w);
-					// call our words processor
 					if (!(w.isEmpty() || w.equals(" ")))
+						// call our words processor
 						wordProcessor.addUniqueWord(w);
 				}
 			}
@@ -66,7 +64,7 @@ public class ReadAndProcessFile {
 	}
 
 	public void searchForWord(String word) {
-		Word returnedWord = wordProcessor.searchForWordInMyList(word);
+		Word returnedWord = wordProcessor.searchForWord(word);
 		if (returnedWord != null) {
 			System.out.print("Got it -> ");
 			System.out.print(returnedWord.getWord() + " - ");
@@ -76,7 +74,7 @@ public class ReadAndProcessFile {
 		}
 	}
 
-	public void sortOrderAndPrintWords(int limitOfOccurences, OrderType orderType) {
+	public void sortOrderAndPrintWords(int limitOfOccurences, FilePathsAndConstants.OrderType orderType) {
 		ArrayList<Word> list = wordProcessor.sortAndOrderByCountsWords(limitOfOccurences, orderType);
 		System.out.println("------------------------------");
 		System.out.println("Words with more then 1k counts ...");
@@ -91,9 +89,8 @@ public class ReadAndProcessFile {
 		System.out.println("Removing all uppder case words ...");
 		wordProcessor.removeAllUpperCaseWords();
 		System.out.println("New count of Unique words = " + wordProcessor.getUniqueWordsCount());
-		System.out.println("------------------------------");
 	}
-	
+
 	public void sortOrderByAlphaAndPrintWords(int limitOfOccurences) {
 		ArrayList<Word> list = wordProcessor.sortAndOrderByWordAlphaWords(limitOfOccurences);
 		System.out.println("------------------------------");
