@@ -5,17 +5,19 @@ import com.welle.settings.MeasureTime;
 
 public class MainClass {
 
+	static MeasureTime mt = new MeasureTime();
+
 	public static void main(String[] args) {
 
 		UniqueWordsDriver u = new UniqueWordsDriver();
 
-		MeasureTime.startMeasuring();
+		mt.startMeasuring();
 		u.startOurUniqueWordsDriver(FilePathsAndConstants.WhichImplementation.LIST);
-		MeasureTime.stopMeasuring();
+		mt.stopMeasuring();
 
-		MeasureTime.startMeasuring();
+		mt.startMeasuring();
 		u.startOurUniqueWordsDriver(FilePathsAndConstants.WhichImplementation.MAP);
-		MeasureTime.stopMeasuring();
+		mt.stopMeasuring();
 
 	}
 

@@ -8,7 +8,9 @@ import java.util.Set;
 import com.welle.settings.FilePathsAndConstants;
 import com.welle.word.Word;
 
-public class UniqueWordsProcessorMapImpl extends UniqueWordsProcessor {
+public class UniqueWordsProcessorMapImpl implements UniqueWordsProcessor {
+
+	protected HashMap<String, Integer> wordsMap = new HashMap<String, Integer>();
 
 	@Override
 	public void clearWords() {

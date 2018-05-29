@@ -2,11 +2,14 @@ package com.welle.unique.words.processor;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import com.welle.settings.FilePathsAndConstants;
 import com.welle.word.Word;
 
-public class UniqueWordsProcessorListImpl extends UniqueWordsProcessor {
+public class UniqueWordsProcessorListImpl implements UniqueWordsProcessor {
+
+	protected List<Word> wordsList = new ArrayList<Word>();
 
 	@Override
 	public void addUniqueWord(String word) {
@@ -14,14 +17,10 @@ public class UniqueWordsProcessorListImpl extends UniqueWordsProcessor {
 		if (wordsList.contains(testWord)) {
 			// if that kind of word exists, just update its occurrences
 			int index = wordsList.indexOf(testWord);
-			Word privousWord = wordsList.get(index);
-			privousWord.setCount(privousWord.getCount() + 1);
-			wordsList.remove(index);
-			wordsList.add(index, privousWord);
+			wordsList.get(index).setCount(wordsList.get(index).getCount() + 1);
 		} else {
 			// create new object and add it to our list
-			Word newWord = new Word(word, 1);
-			wordsList.add(newWord);
+			wordsList.add(new Word(word, 1));
 		}
 	}
 

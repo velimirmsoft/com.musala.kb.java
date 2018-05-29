@@ -2,15 +2,22 @@ package com.welle.settings;
 
 public class MeasureTime {
 
-	public static long startTime;
+	private boolean isMeasuring = false;
+	private long startTime;
 
-	public static void startMeasuring() {
-		startTime = System.currentTimeMillis();
+	public void startMeasuring() {
+		if (!isMeasuring) {
+			startTime = System.currentTimeMillis();
+			isMeasuring = true;
+		}
 	}
 
-	public static void stopMeasuring() {
-		long stopTime = System.currentTimeMillis();
-		System.out.println("final time in mS = " + (stopTime - startTime));
+	public void stopMeasuring() {
+		if (isMeasuring) {
+			long stopTime = System.currentTimeMillis();
+			System.out.println("final time in mS = " + (stopTime - startTime));
+			isMeasuring = false;
+		}
 	}
 
 }
