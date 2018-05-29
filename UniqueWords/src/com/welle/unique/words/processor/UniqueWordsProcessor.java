@@ -25,8 +25,10 @@ public abstract class UniqueWordsProcessor {
 
 	public abstract Word searchForWordInMyList(String word);
 
-	public abstract ArrayList<Word> sortAndPrintWords(int limitOfOccurences, OrderType orderType);
+	public abstract ArrayList<Word> sortAndOrderByCountsWords(int limitOfOccurences, OrderType orderType);
 	
-	public abstract ArrayList<Word> removeAllUpperCaseWords(List<Word> wordsList);
+	public abstract void removeAllUpperCaseWords();
+	
+	public abstract ArrayList<Word> sortAndOrderByWordAlphaWords(int limitOfOccurences);
 
 }

@@ -1,7 +1,7 @@
 package com.welle.unique.words.processor;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Comparator;
 
 import com.welle.word.Word;
 
@@ -39,15 +39,56 @@ public class UniqueWordsProcessorImpl extends UniqueWordsProcessor {
 	}
 
 	@Override
-	public ArrayList<Word> sortAndPrintWords(int limitOfOccurences, OrderType orderType) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Word> sortAndOrderByCountsWords(int limitOfOccurences, OrderType orderType) {
+		ArrayList<Word> newList = new ArrayList<Word>();
+		for (Word w : wordsList) {
+			if (w.getCount() >= limitOfOccurences)
+				newList.add(w);
+		}
+		switch (orderType) {
+		case ASC:
+			// java 7 solution with collection sort and anonymous function
+			newList.sort(new Comparator<Word>() {
+				@Override
+				public int compare(Word o1, Word o2) {
+					return o1.getCount() - o2.getCount();
+				}
+
+			});
+			break;
+		case DESC:
+			// java 8 solution - lambda expression
+			newList.sort((Word o1, Word o2) -> o2.getCount() - o1.getCount());
+			break;
+		}
+		return newList;
 	}
 
 	@Override
-	public ArrayList<Word> removeAllUpperCaseWords(List<Word> wordsList) {
-		// TODO Auto-generated method stub
-		return null;
+	public void removeAllUpperCaseWords() {
+		ArrayList<Word> newList = new ArrayList<Word>();
+		for (Word w : wordsList) {
+			if (!(w.getWord().toUpperCase().equals(w.getWord())))
+				newList.add(w);
+		}
+		wordsList = newList;
+	}
+
+	@Override
+	public ArrayList<Word> sortAndOrderByWordAlphaWords(int limitOfOccurences) {
+		ArrayList<Word> newList = new ArrayList<Word>();
+		for (Word w : wordsList) {
+			if (w.getCount() >= limitOfOccurences)
+				newList.add(w);
+		}
+		newList.sort(new Comparator<Word>() {
+			@Override
+			public int compare(Word o1, Word o2) {
+				return o1.toString().toLowerCase().compareTo(o2.toString().toLowerCase());
+			}
+
+		});
+		return newList;
 	}
 
 }

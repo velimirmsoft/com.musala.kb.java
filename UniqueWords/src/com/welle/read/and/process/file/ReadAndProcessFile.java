@@ -3,10 +3,12 @@ package com.welle.read.and.process.file;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.welle.settings.FilesAndPaths;
 import com.welle.unique.words.processor.UniqueWordsProcessor;
 import com.welle.unique.words.processor.UniqueWordsProcessorImpl;
+import com.welle.unique.words.processor.UniqueWordsProcessor.OrderType;
 import com.welle.word.Word;
 
 public class ReadAndProcessFile {
@@ -35,7 +37,8 @@ public class ReadAndProcessFile {
 					w = w.replaceAll("\\W+", "");
 					// System.out.println("working on = " + w);
 					// call our words processor
-					wordProcessor.addUniqueWord(w);
+					if (!(w.isEmpty() || w.equals(" ")))
+						wordProcessor.addUniqueWord(w);
 				}
 			}
 		} catch (IOException ex) {
@@ -71,6 +74,34 @@ public class ReadAndProcessFile {
 		} else {
 			System.out.println("No word of that kind was found!");
 		}
+	}
+
+	public void sortOrderAndPrintWords(int limitOfOccurences, OrderType orderType) {
+		ArrayList<Word> list = wordProcessor.sortAndOrderByCountsWords(limitOfOccurences, orderType);
+		System.out.println("------------------------------");
+		System.out.println("Words with more then 1k counts ...");
+		for (Word w : list) {
+			System.out.println("" + w.getWord() + " - " + w.getCount());
+		}
+		System.out.println("------------------------------");
+	}
+
+	public void removeAllUppderCase() {
+		// System.out.println("------------------------------");
+		System.out.println("Removing all uppder case words ...");
+		wordProcessor.removeAllUpperCaseWords();
+		System.out.println("New count of Unique words = " + wordProcessor.getUniqueWordsCount());
+		System.out.println("------------------------------");
+	}
+	
+	public void sortOrderByAlphaAndPrintWords(int limitOfOccurences) {
+		ArrayList<Word> list = wordProcessor.sortAndOrderByWordAlphaWords(limitOfOccurences);
+		System.out.println("------------------------------");
+		System.out.println("Words with more then 500 counts and sorted by alpha ...");
+		for (Word w : list) {
+			System.out.println("" + w.getWord() + " - " + w.getCount());
+		}
+		System.out.println("------------------------------");
 	}
 
 }

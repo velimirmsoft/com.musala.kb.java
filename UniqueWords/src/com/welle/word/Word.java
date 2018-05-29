@@ -28,7 +28,7 @@ public class Word {
 
 	@Override
 	public boolean equals(Object obj) {
-		
+
 		// this method is used when Collection is comparing Objects
 		// so when we call '.contains' on our list this method will be called
 		// and it checks for duplicates
@@ -47,6 +47,11 @@ public class Word {
 			return false;
 		}
 
+	}
+
+	@Override
+	public String toString() {
+		return getWord();
 	}
 
 	@Override
