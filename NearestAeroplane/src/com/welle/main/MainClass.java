@@ -1,13 +1,13 @@
 package com.welle.main;
 
-import com.welle.fetcher.FetchAirplaneData;
+import com.welle.driver.DriverImpl;
 
 public class MainClass {
 
 	public static void main(String[] args) {
-		
-		FetchAirplaneData f = new FetchAirplaneData();
-		f.fetchAndStoreAeroplaneData();
+
+		DriverImpl d = new DriverImpl();
+		d.getInputAndStartLoop(10000);
 
 	}
 

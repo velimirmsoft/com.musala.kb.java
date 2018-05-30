@@ -1,4 +1,4 @@
-package com.welle.fetcher;
+package com.welle.unity;
 
 public class AirborneAirplane {
 
@@ -10,7 +10,7 @@ public class AirborneAirplane {
 	private String Callsign;
 
 	// this is calculated
-	private Float GeodesicDistance;
+	private Double GeodesicDistance;
 
 	public AirborneAirplane(String ICAO24_ID, String CountryOfOrigin, Double GeometricAltitude, Double Lattitude,
 			Double Longitude, String Callsign) {
@@ -24,15 +24,15 @@ public class AirborneAirplane {
 
 	@Override
 	public String toString() {
-		return GeodesicDistance + " - " + Callsign + " - " + Lattitude + " - " + Longitude + " - " + GeometricAltitude
+		return GeodesicDistance + " KM - " + Callsign + " - " + Lattitude + " - " + Longitude + " - " + GeometricAltitude
 				+ " - " + CountryOfOrigin + " - " + ICAO24_ID;
 	}
 
-	public Float getGeodesicDistance() {
+	public Double getGeodesicDistance() {
 		return GeodesicDistance;
 	}
 
-	public void setGeodesicDistance(Float geodesicDistance) {
+	public void setGeodesicDistance(Double geodesicDistance) {
 		GeodesicDistance = geodesicDistance;
 	}
 
