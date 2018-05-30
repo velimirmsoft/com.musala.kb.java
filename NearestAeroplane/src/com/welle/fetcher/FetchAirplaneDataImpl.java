@@ -51,16 +51,25 @@ public class FetchAirplaneDataImpl implements FetchAirplaneData {
 			int status = con.getResponseCode();
 			System.out.println("Our Airborne API returned status -> " + status);
 
-			if (status == 200) {
+			if (status >= 200 && status < 400) {
 
-				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-				String inputLine;
-				StringBuffer content = new StringBuffer();
-				while ((inputLine = in.readLine()) != null) {
-					content.append(inputLine);
+				StringBuffer content = null;
+				try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));) {
+
+					String inputLine;
+					content = new StringBuffer();
+					while ((inputLine = in.readLine()) != null) {
+						content.append(inputLine);
+					}
+					in.close();
+
+				} catch (IOException ex) {
+					System.err.println("thrown exception: " + ex.toString());
+					Throwable[] suppressed = ex.getSuppressed();
+					for (int i = 0; i < suppressed.length; i++) {
+						System.err.println("suppressed exception: " + suppressed[i].toString());
+					}
 				}
-				in.close();
-				// System.out.println("" + content.toString());
 
 				JSONParser parser = new JSONParser();
 				Object obj = parser.parse(content.toString());
@@ -71,32 +80,25 @@ public class FetchAirplaneDataImpl implements FetchAirplaneData {
 				System.out.println("time -> " + dateObj);
 
 				JSONArray results = (JSONArray) jsonObject.get("states");
-				Iterator<?> iterator = results.iterator();
+				@SuppressWarnings("unchecked")
+				Iterator<JSONArray> iterator = results.iterator();
 				while (iterator.hasNext()) {
-
-					// private String ICAO24_ID;
-					// private String CountryOfOrigin;
-					// private Float GeometricAltitude;
-					// private Float Lattitude;
-					// private Float Longitude;
-					// private String Callsign;
-
-					JSONArray o = (JSONArray) iterator.next();
-
+					JSONArray o = iterator.next();
 					if (o.get(0) != null && o.get(2) != null && o.get(7) != null && o.get(5) != null && o.get(6) != null && o.get(1) != null) {
-
-						planes.add(new AirborneAirplane((String) o.get(0), (String) o.get(2), Double.valueOf("" + o.get(7)), Double.valueOf("" + o.get(5)), Double.valueOf("" + o.get(6)),
+						planes.add(new AirborneAirplane((String) o.get(0), (String) o.get(2), Double.valueOf("" + o.get(7)), Double.valueOf("" + o.get(6)), Double.valueOf("" + o.get(5)),
 								(String) o.get(1)));
-
 					}
-
 				}
 
 				System.out.println("Total Planes -> " + planes.size());
 
+			} else {
+				System.out.println("Something went wrong -> status = " + status);
 			}
 
-		} catch (MalformedURLException e) {
+		} catch (
+
+		MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
@@ -110,6 +112,24 @@ public class FetchAirplaneDataImpl implements FetchAirplaneData {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public ArrayList<Double> getLatForAllAirbornes() {
+		ArrayList<Double> r = new ArrayList<Double>();
+		for (AirborneAirplane a : planes) {
+			r.add(a.getLattitude());
+		}
+		return r;
+	}
+
+	@Override
+	public ArrayList<Double> getLongForAllAirbornes() {
+		ArrayList<Double> r = new ArrayList<Double>();
+		for (AirborneAirplane a : planes) {
+			r.add(a.getLongitude());
+		}
+		return r;
 	}
 
 }

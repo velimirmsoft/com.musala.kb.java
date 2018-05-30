@@ -2,7 +2,7 @@ package com.welle.calculator;
 
 import java.util.ArrayList;
 
-import static com.welle.settings.and.constants.Const.POSITION;
+import static com.welle.settings.and.constants.Const.Position;
 import com.welle.unity.AirborneAirplane;
 
 public class CalcNearestAirborneImpl implements CalcNearestAirborne {
@@ -12,19 +12,17 @@ public class CalcNearestAirborneImpl implements CalcNearestAirborne {
 
 		System.out.println("Calculating nearest airborne plane!");
 
-		POSITION myPos = determinatePosition(myLatitude, myLongitude);
-		System.out.println("My pos = " + myPos);
+		// Position myPos = determinatePosition(myLatitude, myLongitude);
+		// System.out.println("My pos = " + myPos);
 
 		Double minDistance = 1000000000.0;
 		int indexOfOurClosestAirplane = 0;
 		int c = 0;
 		for (AirborneAirplane a : planes) {
-			if (determinatePosition(a.getLattitude(), a.getLongitude()) == myPos) {
-				Double tempDis = calcEuclideanDistance(myLatitude, myLongitude, a.getLattitude(), a.getLongitude());
-				if (tempDis < minDistance) {
-					minDistance = tempDis;
-					indexOfOurClosestAirplane = c;
-				}
+			Double tempDis = calcEuclideanDistance(myLatitude, myLongitude, a.getLattitude(), a.getLongitude());
+			if (tempDis < minDistance) {
+				minDistance = tempDis;
+				indexOfOurClosestAirplane = c;
 			}
 			c++;
 		}
@@ -38,16 +36,16 @@ public class CalcNearestAirborneImpl implements CalcNearestAirborne {
 	}
 
 	@Override
-	public POSITION determinatePosition(double Latitude, double Longitude) {
-		POSITION pos = null;
-		if (Longitude > 0 && Latitude > 0) {
-			pos = POSITION.NE;
-		} else if (Longitude < 0 && Latitude > 0) {
-			pos = POSITION.NW;
-		} else if (Longitude < 0 && Latitude < 0) {
-			pos = POSITION.SW;
-		} else if (Longitude < 0 && Latitude > 0) {
-			pos = POSITION.SE;
+	public Position determinatePosition(double latitude, double longitude) {
+		Position pos = null;
+		if (longitude > 0 && latitude > 0) {
+			pos = Position.NE;
+		} else if (longitude < 0 && latitude > 0) {
+			pos = Position.NW;
+		} else if (longitude < 0 && latitude < 0) {
+			pos = Position.SW;
+		} else if (longitude < 0 && latitude > 0) {
+			pos = Position.SE;
 		}
 		return pos;
 	}
@@ -71,5 +69,4 @@ public class CalcNearestAirborneImpl implements CalcNearestAirborne {
 	private double rad2deg(double rad) {
 		return (rad * 180.0 / Math.PI);
 	}
-
 }

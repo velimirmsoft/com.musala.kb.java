@@ -2,30 +2,28 @@ package com.welle.unity;
 
 public class AirborneAirplane {
 
-	private String ICAO24_ID;
-	private String CountryOfOrigin;
-	private Double GeometricAltitude;
-	private Double Lattitude;
-	private Double Longitude;
-	private String Callsign;
+	private String iCAO24_ID;
+	private String countryOfOrigin;
+	private Double geometricAltitude;
+	private Double lattitude;
+	private Double longitude;
+	private String callSign;
 
 	// this is calculated
 	private Double GeodesicDistance;
 
-	public AirborneAirplane(String ICAO24_ID, String CountryOfOrigin, Double GeometricAltitude, Double Lattitude,
-			Double Longitude, String Callsign) {
-		this.ICAO24_ID = ICAO24_ID;
-		this.CountryOfOrigin = CountryOfOrigin;
-		this.GeometricAltitude = GeometricAltitude;
-		this.Lattitude = Lattitude;
-		this.Longitude = Longitude;
-		this.Callsign = Callsign;
+	public AirborneAirplane(String ICAO24_ID, String CountryOfOrigin, Double GeometricAltitude, Double Lattitude, Double Longitude, String Callsign) {
+		this.iCAO24_ID = ICAO24_ID;
+		this.countryOfOrigin = CountryOfOrigin;
+		this.geometricAltitude = GeometricAltitude;
+		this.lattitude = Lattitude;
+		this.longitude = Longitude;
+		this.callSign = Callsign;
 	}
 
 	@Override
 	public String toString() {
-		return GeodesicDistance + " KM - " + Callsign + " - " + Lattitude + " - " + Longitude + " - " + GeometricAltitude
-				+ " - " + CountryOfOrigin + " - " + ICAO24_ID;
+		return GeodesicDistance + " KM | " + callSign + " | " + lattitude + " and " + longitude + " | " + geometricAltitude + " | " + countryOfOrigin + " | " + iCAO24_ID;
 	}
 
 	public Double getGeodesicDistance() {
@@ -37,51 +35,51 @@ public class AirborneAirplane {
 	}
 
 	public String getCallsign() {
-		return Callsign;
+		return callSign;
 	}
 
-	public void setCallsign(String callsign) {
-		Callsign = callsign;
+	public void setCallsign(String Callsign) {
+		this.callSign = Callsign;
 	}
 
 	public Double getLattitude() {
-		return Lattitude;
+		return lattitude;
 	}
 
 	public void setLattitude(Double lattitude) {
-		Lattitude = lattitude;
+		this.lattitude = lattitude;
 	}
 
 	public Double getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 
 	public void setLongitude(Double longitude) {
-		Longitude = longitude;
+		this.longitude = longitude;
 	}
 
 	public Double getGeometricAltitude() {
-		return GeometricAltitude;
+		return geometricAltitude;
 	}
 
 	public void setGeometricAltitude(Double geometricAltitude) {
-		GeometricAltitude = geometricAltitude;
+		this.geometricAltitude = geometricAltitude;
 	}
 
 	public String getCountryOfOrigin() {
-		return CountryOfOrigin;
+		return countryOfOrigin;
 	}
 
 	public void setCountryOfOrigin(String countryOfOrigin) {
-		CountryOfOrigin = countryOfOrigin;
+		this.countryOfOrigin = countryOfOrigin;
 	}
 
 	public String getICAO24_ID() {
-		return ICAO24_ID;
+		return iCAO24_ID;
 	}
 
 	public void setICAO24_ID(String iCAO24_ID) {
-		ICAO24_ID = iCAO24_ID;
+		this.iCAO24_ID = iCAO24_ID;
 	}
 
 }

@@ -10,4 +10,8 @@ public interface FetchAirplaneData {
 
 	public ArrayList<AirborneAirplane> returnPlanes();
 
+	public ArrayList<Double> getLatForAllAirbornes();
+	
+	public ArrayList<Double> getLongForAllAirbornes();
+
 }

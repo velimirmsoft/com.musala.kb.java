@@ -2,7 +2,7 @@ package com.welle.calculator;
 
 import java.util.ArrayList;
 
-import com.welle.settings.and.constants.Const.POSITION;
+import com.welle.settings.and.constants.Const.Position;
 import com.welle.unity.AirborneAirplane;
 
 public interface CalcNearestAirborne {
@@ -11,6 +11,6 @@ public interface CalcNearestAirborne {
 
 	public Double calcEuclideanDistance(double myLatitude, double myLongitude, double planeLatitude, double planeLongitude);
 
-	public POSITION determinatePosition(double Latitude, double Longitude);
+	public Position determinatePosition(double Latitude, double Longitude);
 
 }

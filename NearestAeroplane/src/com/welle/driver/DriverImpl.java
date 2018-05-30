@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import com.welle.calculator.CalcNearestAirborneImpl;
 import com.welle.fetcher.FetchAirplaneDataImpl;
 import com.welle.plot.data.PlotMyPlaneData;
+import com.welle.settings.and.constants.Const;
 import com.welle.unity.AirborneAirplane;
 
 public class DriverImpl implements Driver {
@@ -30,7 +31,7 @@ public class DriverImpl implements Driver {
 		Scanner sc = new Scanner(System.in);
 		String input = sc.nextLine();
 		if (input.equals("c")) {
-			loopFetchAndCalculate(timePeriod, null, null);
+			loopFetchAndCalculate(timePeriod, Const.DEF_LATITUDE, Const.DEF_LONGITUDE);
 		} else {
 			double latitude = Double.parseDouble(input);
 			double longitude = Double.parseDouble(sc.nextLine());
@@ -50,14 +51,10 @@ public class DriverImpl implements Driver {
 				f.fetchAndStoreAeroplaneData();
 				CalcNearestAirborneImpl c = new CalcNearestAirborneImpl();
 				AirborneAirplane a = null;
-				if (myLatitude == null) {
-					a = c.calculateNearesAirborne(f.returnPlanes(), 41.993952, 21.435601);
-				} else {
-					a = c.calculateNearesAirborne(f.returnPlanes(), myLatitude, myLongitude);
-				}
+				a = c.calculateNearesAirborne(f.returnPlanes(), myLatitude, myLongitude);
+				// update plots
 				loopCounter++;
-				plotter.addToMySeries(Double.valueOf(loopCounter), a.getGeodesicDistance(), a.getGeometricAltitude());
-				plotter.updatePlot("" + a.getCallsign() + " - " + a.getICAO24_ID());
+				plotter.addAndUpdatePlot(a.getCallsign(), Double.valueOf(loopCounter), a.getGeodesicDistance(), a.getGeometricAltitude(), f.getLatForAllAirbornes(), f.getLongForAllAirbornes());
 			}
 		};
 		loopFetchTimer = new Timer("looper");
