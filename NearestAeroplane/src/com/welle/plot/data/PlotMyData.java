@@ -8,7 +8,7 @@ public interface PlotMyData {
 
 	public void showPlot();
 
-	public void addAndUpdatePlot(String forAirplane, Double x, Double y, Double z, List<Double> scatterX, List<Double> scatterY);
+	public void addAndUpdatePlot(String forAirplane, Float time, Float y1, Float y2, Float y3, List<Float> scatterX, List<Float> scatterY);
 
 	public void debugPrintData();
 

@@ -4,18 +4,20 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.welle.calculator.CalcNearestAirborneImpl;
+import com.welle.calculator.CalcAirborneDataImpl;
 import com.welle.fetcher.FetchAirplaneDataImpl;
-import com.welle.plot.data.PlotMyPlaneData;
+import com.welle.plot.data.PlotMyAirplaneData;
 import com.welle.settings.and.constants.Const;
 import com.welle.unity.AirborneAirplane;
 
 public class DriverImpl implements Driver {
 
 	private Timer loopFetchTimer = null;
-	private int loopCounter = 0;
+	private float loopCounter = 0;
 
-	private PlotMyPlaneData plotter;
+	private PlotMyAirplaneData plotter;
+	private FetchAirplaneDataImpl fetcher;
+	private CalcAirborneDataImpl calculator;
 
 	@Override
 	public void getInputAndStartLoop(long timePeriod) {
@@ -23,8 +25,14 @@ public class DriverImpl implements Driver {
 		System.out.println("Welcome to my NeareastAirborne tracker ...");
 		System.out.println("Enter your Latitude or Longitude or enter 'c' to use default coordinates ...");
 
+		Const.timeInterval = timePeriod;
+
+		// init things
+		fetcher = new FetchAirplaneDataImpl();
+		calculator = new CalcAirborneDataImpl();
+
 		// init our plotter
-		plotter = new PlotMyPlaneData();
+		plotter = new PlotMyAirplaneData();
 		plotter.initPlot();
 		plotter.showPlot();
 
@@ -33,8 +41,8 @@ public class DriverImpl implements Driver {
 		if (input.equals("c")) {
 			loopFetchAndCalculate(timePeriod, Const.DEF_LATITUDE, Const.DEF_LONGITUDE);
 		} else {
-			double latitude = Double.parseDouble(input);
-			double longitude = Double.parseDouble(sc.nextLine());
+			Float latitude = Float.parseFloat(input);
+			Float longitude = Float.parseFloat(sc.nextLine());
 			loopFetchAndCalculate(timePeriod, latitude, longitude);
 		}
 		sc.close();
@@ -42,19 +50,17 @@ public class DriverImpl implements Driver {
 	}
 
 	@Override
-	public void loopFetchAndCalculate(long timePeriod, Double myLatitude, Double myLongitude) {
+	public void loopFetchAndCalculate(long timePeriod, Float myLatitude, Float myLongitude) {
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-				// fetchAndStoreAeroplaneData();
-				FetchAirplaneDataImpl f = new FetchAirplaneDataImpl();
-				f.fetchAndStoreAeroplaneData();
-				CalcNearestAirborneImpl c = new CalcNearestAirborneImpl();
+				fetcher.fetchAndStoreAeroplaneData();
 				AirborneAirplane a = null;
-				a = c.calculateNearesAirborne(f.returnPlanes(), myLatitude, myLongitude);
+				a = calculator.calculateNearesAirborne(fetcher.returnPlanes(), myLatitude, myLongitude);
 				// update plots
 				loopCounter++;
-				plotter.addAndUpdatePlot(a.getCallsign(), Double.valueOf(loopCounter), a.getGeodesicDistance(), a.getGeometricAltitude(), f.getLatForAllAirbornes(), f.getLongForAllAirbornes());
+				plotter.addAndUpdatePlot(a.toString(), loopCounter, a.getGeodesicDistance(), a.getGeometricAltitude(), a.getSpeedOfAirplane(), fetcher.getLatForAllAirbornes(),
+						fetcher.getLongForAllAirbornes());
 			}
 		};
 		loopFetchTimer = new Timer("looper");

@@ -7,10 +7,10 @@ import com.welle.unity.AirborneAirplane;
 
 public interface CalcNearestAirborne {
 
-	public AirborneAirplane calculateNearesAirborne(ArrayList<AirborneAirplane> planes, double myLatitude, double myLongitude);
+	public AirborneAirplane calculateNearesAirborne(ArrayList<AirborneAirplane> planes, Float myLatitude, Float myLongitude);
 
-	public Double calcEuclideanDistance(double myLatitude, double myLongitude, double planeLatitude, double planeLongitude);
+	public Float calcEuclideanDistance(Float myLatitude, Float myLongitude, Float planeLatitude, Float planeLongitude);
 
-	public Position determinatePosition(double Latitude, double Longitude);
+	public Position determinatePosition(Float Latitude, Float Longitude);
 
 }

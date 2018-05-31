@@ -3,6 +3,7 @@ package com.welle.fetcher;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -85,7 +86,7 @@ public class FetchAirplaneDataImpl implements FetchAirplaneData {
 				while (iterator.hasNext()) {
 					JSONArray o = iterator.next();
 					if (o.get(0) != null && o.get(2) != null && o.get(7) != null && o.get(5) != null && o.get(6) != null && o.get(1) != null) {
-						planes.add(new AirborneAirplane((String) o.get(0), (String) o.get(2), Double.valueOf("" + o.get(7)), Double.valueOf("" + o.get(6)), Double.valueOf("" + o.get(5)),
+						planes.add(new AirborneAirplane((String) o.get(0), (String) o.get(2), Float.valueOf("" + o.get(7)), Float.valueOf("" + o.get(6)), Float.valueOf("" + o.get(5)),
 								(String) o.get(1)));
 					}
 				}
@@ -115,8 +116,8 @@ public class FetchAirplaneDataImpl implements FetchAirplaneData {
 	}
 
 	@Override
-	public ArrayList<Double> getLatForAllAirbornes() {
-		ArrayList<Double> r = new ArrayList<Double>();
+	public ArrayList<Float> getLatForAllAirbornes() {
+		ArrayList<Float> r = new ArrayList<Float>();
 		for (AirborneAirplane a : planes) {
 			r.add(a.getLattitude());
 		}
@@ -124,8 +125,8 @@ public class FetchAirplaneDataImpl implements FetchAirplaneData {
 	}
 
 	@Override
-	public ArrayList<Double> getLongForAllAirbornes() {
-		ArrayList<Double> r = new ArrayList<Double>();
+	public ArrayList<Float> getLongForAllAirbornes() {
+		ArrayList<Float> r = new ArrayList<Float>();
 		for (AirborneAirplane a : planes) {
 			r.add(a.getLongitude());
 		}

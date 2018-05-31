@@ -4,15 +4,16 @@ public class AirborneAirplane {
 
 	private String iCAO24_ID;
 	private String countryOfOrigin;
-	private Double geometricAltitude;
-	private Double lattitude;
-	private Double longitude;
+	private Float geometricAltitude;
+	private Float lattitude;
+	private Float longitude;
 	private String callSign;
+	private Float speedOfAirplane;
 
 	// this is calculated
-	private Double GeodesicDistance;
+	private Float GeodesicDistance;
 
-	public AirborneAirplane(String ICAO24_ID, String CountryOfOrigin, Double GeometricAltitude, Double Lattitude, Double Longitude, String Callsign) {
+	public AirborneAirplane(String ICAO24_ID, String CountryOfOrigin, Float GeometricAltitude, Float Lattitude, Float Longitude, String Callsign) {
 		this.iCAO24_ID = ICAO24_ID;
 		this.countryOfOrigin = CountryOfOrigin;
 		this.geometricAltitude = GeometricAltitude;
@@ -23,14 +24,14 @@ public class AirborneAirplane {
 
 	@Override
 	public String toString() {
-		return GeodesicDistance + " KM | " + callSign + " | " + lattitude + " and " + longitude + " | " + geometricAltitude + " | " + countryOfOrigin + " | " + iCAO24_ID;
+		return GeodesicDistance + " KM | " + callSign + " | " + lattitude + " and " + longitude + " | " + geometricAltitude + " | " + speedOfAirplane + " KM/h | " + countryOfOrigin + " | " + iCAO24_ID;
 	}
 
-	public Double getGeodesicDistance() {
+	public Float getGeodesicDistance() {
 		return GeodesicDistance;
 	}
 
-	public void setGeodesicDistance(Double geodesicDistance) {
+	public void setGeodesicDistance(Float geodesicDistance) {
 		GeodesicDistance = geodesicDistance;
 	}
 
@@ -42,27 +43,27 @@ public class AirborneAirplane {
 		this.callSign = Callsign;
 	}
 
-	public Double getLattitude() {
+	public Float getLattitude() {
 		return lattitude;
 	}
 
-	public void setLattitude(Double lattitude) {
+	public void setLattitude(Float lattitude) {
 		this.lattitude = lattitude;
 	}
 
-	public Double getLongitude() {
+	public Float getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(Double longitude) {
+	public void setLongitude(Float longitude) {
 		this.longitude = longitude;
 	}
 
-	public Double getGeometricAltitude() {
+	public Float getGeometricAltitude() {
 		return geometricAltitude;
 	}
 
-	public void setGeometricAltitude(Double geometricAltitude) {
+	public void setGeometricAltitude(Float geometricAltitude) {
 		this.geometricAltitude = geometricAltitude;
 	}
 
@@ -80,6 +81,14 @@ public class AirborneAirplane {
 
 	public void setICAO24_ID(String iCAO24_ID) {
 		this.iCAO24_ID = iCAO24_ID;
+	}
+
+	public Float getSpeedOfAirplane() {
+		return speedOfAirplane;
+	}
+
+	public void setSpeedOfAirplane(Float speedOfAirplane) {
+		this.speedOfAirplane = speedOfAirplane;
 	}
 
 }
