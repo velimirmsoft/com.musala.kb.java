@@ -81,10 +81,10 @@ public class AirborneDataImpl implements CalcNearestAirborne, CalcSpeedOfAirplan
 			// v = s / t
 			Float tReturn = d / h;
 			if (Float.isNaN(tReturn) || tReturn >= 100000 || tReturn == previousSpeed) {
-				this.timeBetweenStates = this.timeBetweenStates + Const.timeInterval;
+				this.timeBetweenStates = this.timeBetweenStates + Const.TIME_INTERVAL;
 				return 0.0f;
 			}
-			this.timeBetweenStates = Const.timeInterval;
+			this.timeBetweenStates = Const.TIME_INTERVAL;
 			previousSpeed = tReturn;
 			return tReturn;
 		}

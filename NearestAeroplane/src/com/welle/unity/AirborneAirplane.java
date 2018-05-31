@@ -11,7 +11,7 @@ public class AirborneAirplane {
 	private Float speedOfAirplane;
 
 	// this is calculated
-	private Float GeodesicDistance;
+	private Float geodesicDistance = 0.0f;
 
 	public AirborneAirplane(String icao24Id, String CountryOfOrigin, Float GeometricAltitude, Float Lattitude, Float Longitude, String Callsign) {
 		this.icao24Id = icao24Id;
@@ -24,15 +24,15 @@ public class AirborneAirplane {
 
 	@Override
 	public String toString() {
-		return GeodesicDistance + " KM | " + callSign + " | " + lattitude + " and " + longitude + " | " + geometricAltitude + " | " + speedOfAirplane + " KM/h | " + countryOfOrigin + " | " + icao24Id;
+		return geodesicDistance + " KM | " + callSign + " | " + lattitude + " and " + longitude + " | " + geometricAltitude + " | " + speedOfAirplane + " KM/h | " + countryOfOrigin + " | " + icao24Id;
 	}
 
 	public Float getGeodesicDistance() {
-		return GeodesicDistance;
+		return geodesicDistance;
 	}
 
 	public void setGeodesicDistance(Float geodesicDistance) {
-		GeodesicDistance = geodesicDistance;
+		this.geodesicDistance = geodesicDistance;
 	}
 
 	public String getCallsign() {

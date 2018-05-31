@@ -7,6 +7,8 @@ import com.welle.unity.AirborneAirplane;
 public interface FetchAirplaneData {
 
 	public void fetchAndStoreAeroplaneData();
+	
+	public Long returnTimeOfFetch();
 
 	public ArrayList<AirborneAirplane> returnPlanes();
 

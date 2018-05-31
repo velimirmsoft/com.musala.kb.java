@@ -3,16 +3,13 @@ package com.welle.fetcher;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.Locale;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -24,11 +21,17 @@ import com.welle.unity.AirborneAirplane;
 
 public class FetchAirplaneDataImpl implements FetchAirplaneData {
 
+	private Long timeOfFetch;
 	private ArrayList<AirborneAirplane> planes = new ArrayList<AirborneAirplane>();
 
 	@Override
 	public ArrayList<AirborneAirplane> returnPlanes() {
 		return planes;
+	}
+
+	@Override
+	public Long returnTimeOfFetch() {
+		return timeOfFetch;
 	}
 
 	@Override
@@ -76,8 +79,8 @@ public class FetchAirplaneDataImpl implements FetchAirplaneData {
 				Object obj = parser.parse(content.toString());
 				JSONObject jsonObject = (JSONObject) obj;
 
-				Long time = (Long) jsonObject.get("time");
-				Date dateObj = new Date(time * 1000);
+				timeOfFetch = (Long) jsonObject.get("time");
+				Date dateObj = new Date(timeOfFetch * 1000);
 				System.out.println("time -> " + dateObj);
 
 				JSONArray results = (JSONArray) jsonObject.get("states");

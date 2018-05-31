@@ -37,7 +37,7 @@ public class PlotMyAirplaneData implements PlotMyData {
 
 	public static final String SERIES_NAME_DISTANCE = "Distance To our closest Airborne - Logger";
 	public static final String SERIES_NAME_ALTITUDE = "Altitude To our closest Airborne - Logger";
-	public static final String SERIES_NAME_SPEED = "Speed Of our closest Airborne - Logger";
+	public static final String SERIES_NAME_SPEED = "Speed Of our closest Airborne - Logger - WRONG";
 	public static final String SERIES_NAME_ALL_COORDINATES = "Scatter of all Distances - Logger";
 	public static final String SERIES_NAME_MY_LOCATION = "My Location - Logger";
 

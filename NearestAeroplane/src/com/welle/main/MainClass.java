@@ -8,7 +8,7 @@ public class MainClass {
 	public static void main(String[] args) {
 
 		Driver d = new DriverImpl();
-		d.getInputAndStartLoop(2000);
+		d.getInputAndStartLoop(5000);
 
 	}
 
