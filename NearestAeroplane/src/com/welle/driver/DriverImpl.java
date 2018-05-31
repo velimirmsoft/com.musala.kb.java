@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.welle.calculator.CalcAirborneDataImpl;
+import com.welle.calculator.AirborneDataImpl;
 import com.welle.fetcher.FetchAirplaneDataImpl;
 import com.welle.plot.data.PlotMyAirplaneData;
 import com.welle.settings.and.constants.Const;
@@ -17,7 +17,7 @@ public class DriverImpl implements Driver {
 
 	private PlotMyAirplaneData plotter;
 	private FetchAirplaneDataImpl fetcher;
-	private CalcAirborneDataImpl calculator;
+	private AirborneDataImpl calculator;
 
 	@Override
 	public void getInputAndStartLoop(long timePeriod) {
@@ -29,7 +29,7 @@ public class DriverImpl implements Driver {
 
 		// init things
 		fetcher = new FetchAirplaneDataImpl();
-		calculator = new CalcAirborneDataImpl();
+		calculator = new AirborneDataImpl();
 
 		// init our plotter
 		plotter = new PlotMyAirplaneData();
@@ -41,9 +41,7 @@ public class DriverImpl implements Driver {
 		if (input.equals("c")) {
 			loopFetchAndCalculate(timePeriod, Const.DEF_LATITUDE, Const.DEF_LONGITUDE);
 		} else {
-			Float latitude = Float.parseFloat(input);
-			Float longitude = Float.parseFloat(sc.nextLine());
-			loopFetchAndCalculate(timePeriod, latitude, longitude);
+			loopFetchAndCalculate(timePeriod, Float.parseFloat(input), Float.parseFloat(sc.nextLine()));
 		}
 		sc.close();
 
@@ -54,11 +52,9 @@ public class DriverImpl implements Driver {
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-				fetcher.fetchAndStoreAeroplaneData();
-				AirborneAirplane a = null;
-				a = calculator.calculateNearesAirborne(fetcher.returnPlanes(), myLatitude, myLongitude);
-				// update plots
 				loopCounter++;
+				fetcher.fetchAndStoreAeroplaneData();
+				AirborneAirplane a = calculator.calculateNearesAirborne(fetcher.returnPlanes(), myLatitude, myLongitude);
 				plotter.addAndUpdatePlot(a.toString(), loopCounter, a.getGeodesicDistance(), a.getGeometricAltitude(), a.getSpeedOfAirplane(), fetcher.getLatForAllAirbornes(),
 						fetcher.getLongForAllAirbornes());
 			}

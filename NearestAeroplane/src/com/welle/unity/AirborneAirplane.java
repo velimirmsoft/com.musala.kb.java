@@ -2,7 +2,7 @@ package com.welle.unity;
 
 public class AirborneAirplane {
 
-	private String iCAO24_ID;
+	private String icao24Id;
 	private String countryOfOrigin;
 	private Float geometricAltitude;
 	private Float lattitude;
@@ -13,8 +13,8 @@ public class AirborneAirplane {
 	// this is calculated
 	private Float GeodesicDistance;
 
-	public AirborneAirplane(String ICAO24_ID, String CountryOfOrigin, Float GeometricAltitude, Float Lattitude, Float Longitude, String Callsign) {
-		this.iCAO24_ID = ICAO24_ID;
+	public AirborneAirplane(String icao24Id, String CountryOfOrigin, Float GeometricAltitude, Float Lattitude, Float Longitude, String Callsign) {
+		this.icao24Id = icao24Id;
 		this.countryOfOrigin = CountryOfOrigin;
 		this.geometricAltitude = GeometricAltitude;
 		this.lattitude = Lattitude;
@@ -24,7 +24,7 @@ public class AirborneAirplane {
 
 	@Override
 	public String toString() {
-		return GeodesicDistance + " KM | " + callSign + " | " + lattitude + " and " + longitude + " | " + geometricAltitude + " | " + speedOfAirplane + " KM/h | " + countryOfOrigin + " | " + iCAO24_ID;
+		return GeodesicDistance + " KM | " + callSign + " | " + lattitude + " and " + longitude + " | " + geometricAltitude + " | " + speedOfAirplane + " KM/h | " + countryOfOrigin + " | " + icao24Id;
 	}
 
 	public Float getGeodesicDistance() {
@@ -76,11 +76,11 @@ public class AirborneAirplane {
 	}
 
 	public String getICAO24_ID() {
-		return iCAO24_ID;
+		return icao24Id;
 	}
 
 	public void setICAO24_ID(String iCAO24_ID) {
-		this.iCAO24_ID = iCAO24_ID;
+		this.icao24Id = iCAO24_ID;
 	}
 
 	public Float getSpeedOfAirplane() {

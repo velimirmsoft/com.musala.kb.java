@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import static com.welle.settings.and.constants.Const.Position;
 
 import com.welle.settings.and.constants.Const;
+import com.welle.settings.and.constants.MyMath;
 import com.welle.unity.AirborneAirplane;
 
-public class CalcAirborneDataImpl implements CalcNearestAirborne, CalcSpeedOfAirplane {
+public class AirborneDataImpl implements CalcNearestAirborne, CalcSpeedOfAirplane {
 
 	// here we save the state of our previousPlane
 	private AirborneAirplane previousPlane = null;
+	private Long timeBetweenStates = (long) 0;
+	private Float previousSpeed = 0.0f;
 
 	@Override
 	public AirborneAirplane calculateNearesAirborne(ArrayList<AirborneAirplane> planes, Float myLatitude, Float myLongitude) {
@@ -21,25 +24,20 @@ public class CalcAirborneDataImpl implements CalcNearestAirborne, CalcSpeedOfAir
 		// System.out.println("My pos = " + myPos);
 
 		Float minDistance = 1000000000.0f;
-		int indexOfOurClosestAirplane = 0;
-		int c = 0;
+		int indexOfOurClosestAirplane = 0, counter = 0;
 		for (AirborneAirplane a : planes) {
 			Float tempDis = calcEuclideanDistance(myLatitude, myLongitude, a.getLattitude(), a.getLongitude());
 			if (tempDis < minDistance) {
 				minDistance = tempDis;
-				indexOfOurClosestAirplane = c;
+				indexOfOurClosestAirplane = counter;
 			}
-			c++;
+			counter++;
 		}
 
 		AirborneAirplane finalPlane = planes.get(indexOfOurClosestAirplane);
+
 		finalPlane.setGeodesicDistance(minDistance);
-
-		// calc the speed of this airplane
-		Float speed = getVelocityOfOurAirplane(getPrivousStateOfOurAirplane(), finalPlane, Const.timeInterval);
-		finalPlane.setSpeedOfAirplane(speed);
-
-		// save our airplane
+		finalPlane.setSpeedOfAirplane(getVelocityOfOurAirplane(getPrivousStateOfOurAirplane(), finalPlane, timeBetweenStates));
 		setPrivousStateOfOurAirplane(finalPlane);
 
 		System.out.println(finalPlane.toString());
@@ -66,50 +64,28 @@ public class CalcAirborneDataImpl implements CalcNearestAirborne, CalcSpeedOfAir
 	public Float calcEuclideanDistance(Float myLatitude, Float myLongitude, Float planeLatitude, Float planeLongitude) {
 		// copied from the net - theres a lot of math there ...
 		Float theta = myLongitude - planeLongitude;
-		Float dist = (float) (Math.sin(deg2rad(myLatitude)) * Math.sin(deg2rad(planeLatitude)) + Math.cos(deg2rad(myLatitude)) * Math.cos(deg2rad(planeLatitude)) * Math.cos(deg2rad(theta)));
+		Float dist = (float) (Math.sin(MyMath.deg2rad(myLatitude)) * Math.sin(MyMath.deg2rad(planeLatitude))
+				+ Math.cos(MyMath.deg2rad(myLatitude)) * Math.cos(MyMath.deg2rad(planeLatitude)) * Math.cos(MyMath.deg2rad(theta)));
 		dist = (float) Math.acos(dist);
-		dist = rad2deg(dist);
+		dist = MyMath.rad2deg(dist);
 		dist = (float) (dist * 60 * 1.1515);
 		dist = (float) (dist * 1.609344);
 		return (dist);
 	}
 
-	private Float deg2rad(Float deg) {
-		return (float) (deg * Math.PI / 180.0);
-	}
-
-	private Float rad2deg(Float rad) {
-		return (float) (rad * 180.0 / Math.PI);
-	}
-
 	@Override
 	public Float getVelocityOfOurAirplane(AirborneAirplane pastState, AirborneAirplane currentState, Long timeBetweenStates) {
-		// v = s / t
 		if (pastState != null) {
-
 			Float d = calcEuclideanDistance(pastState.getLattitude(), pastState.getLongitude(), currentState.getLattitude(), currentState.getLongitude());
-			// System.out.println("d = " + d);
-
-			// convert the time into H's
 			float h = (float) (timeBetweenStates / 1000) / 60 / 60;
-			// System.out.println("h = " + h);
-
-			// Float a = pastState.getGeodesicDistance();
-			// Float b = currentState.getGeodesicDistance();
-
-			// Float cosT = b / a;
-			// Float T = (float) Math.acos(cosT);
-
-			// Float d2 = (float) Math.sin(T) * a;
-			// System.out.println("Od teorema d2 = " + d2);
-
-			Float constToFixThingsUp = (float) (2 * timeBetweenStates / 1000);
-			Float tReturn = d / h / (constToFixThingsUp);
-
-			// invalid input
-			if (Float.isNaN(tReturn) || tReturn >= 100000)
+			// v = s / t
+			Float tReturn = d / h;
+			if (Float.isNaN(tReturn) || tReturn >= 100000 || tReturn == previousSpeed) {
+				this.timeBetweenStates = this.timeBetweenStates + Const.timeInterval;
 				return 0.0f;
-
+			}
+			this.timeBetweenStates = Const.timeInterval;
+			previousSpeed = tReturn;
 			return tReturn;
 		}
 		return 0.0f;
