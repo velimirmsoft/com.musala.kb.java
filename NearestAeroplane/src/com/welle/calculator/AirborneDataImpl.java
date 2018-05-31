@@ -10,8 +10,8 @@ import com.welle.unity.AirborneAirplane;
 
 public class AirborneDataImpl implements CalcNearestAirborne, CalcSpeedOfAirplane {
 
-	// here we save the state of our previousPlane
 	private AirborneAirplane previousPlane = null;
+
 	private Long timeBetweenStates = (long) 0;
 	private Float previousSpeed = 0.0f;
 
@@ -80,14 +80,13 @@ public class AirborneDataImpl implements CalcNearestAirborne, CalcSpeedOfAirplan
 			float h = (float) (timeBetweenStates / 1000) / 60 / 60;
 			// v = s / t
 			Float tReturn = d / h;
-			if (Float.isNaN(tReturn) || tReturn >= 100000 || tReturn == previousSpeed) {
+			if (Float.isNaN(tReturn) || tReturn >= 100000) {
 				this.timeBetweenStates = this.timeBetweenStates + Const.TIME_INTERVAL;
 				return 0.0f;
 			}
-			this.timeBetweenStates = Const.TIME_INTERVAL;
-			previousSpeed = tReturn;
 			return tReturn;
 		}
+		this.timeBetweenStates = this.timeBetweenStates + Const.TIME_INTERVAL;
 		return 0.0f;
 	}
 

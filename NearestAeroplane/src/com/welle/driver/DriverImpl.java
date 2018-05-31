@@ -39,7 +39,7 @@ public class DriverImpl implements Driver {
 		fetcher = new FetchAirplaneDataImpl();
 		calculator = new AirborneDataImpl();
 		writterToDisk = new WriteAllAirplanesToDiskCVS();
-		writterToDisk.setPath("C:\\Users\\velimir.avramovski\\eclipse-workspace\\NearestAeroplane\\writeFilesHere\\");
+		writterToDisk.setPath("C:\\velimir-avramovski-work\\java-things\\writeFilesHere\\");
 		myDbManager = new MyDatabaseManager();
 		myDbManager.connectToDB(Const.JBDC_TO_ORACLE_DB, Const.DB_USER, Const.DB_PASS);
 		// myDbManager.clearFromDb(Const.DB_NAME);
