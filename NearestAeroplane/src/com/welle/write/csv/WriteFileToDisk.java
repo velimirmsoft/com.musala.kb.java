@@ -6,7 +6,7 @@ import com.welle.unity.AirborneAirplane;
 
 public interface WriteFileToDisk {
 
-	public void writeAllAirplanesToDisk(String fileName, Long timeOfWriting, ArrayList<AirborneAirplane> planes);
+	public void writeAirplanesDataToDisk(String fileName, Long timeOfWriting, ArrayList<AirborneAirplane> planes);
 	
 	public void setPath(String path);
 	

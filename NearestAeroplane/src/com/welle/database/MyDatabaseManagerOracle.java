@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import com.welle.unity.AirborneAirplane;
 
-public class MyDatabaseManager implements DatabaseManagerOracle {
+public class MyDatabaseManagerOracle implements DatabaseManager {
 
 	private Connection con;
 
@@ -48,7 +48,7 @@ public class MyDatabaseManager implements DatabaseManagerOracle {
 	}
 
 	@Override
-	public ArrayList<?> getAllFromDb() {
+	public ArrayList<Object> getAllFromDb() {
 		return null;
 	}
 

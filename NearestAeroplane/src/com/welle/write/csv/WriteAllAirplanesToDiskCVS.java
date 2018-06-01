@@ -11,7 +11,7 @@ public class WriteAllAirplanesToDiskCVS implements WriteFileToDisk {
 	private String path = "";
 
 	@Override
-	public void writeAllAirplanesToDisk(String fileName, Long timeOfWriting, ArrayList<AirborneAirplane> planes) {
+	public void writeAirplanesDataToDisk(String fileName, Long timeOfWriting, ArrayList<AirborneAirplane> planes) {
 
 		String csvFile = getPath() + fileName + ".cvs";
 		try (FileWriter writer = new FileWriter(csvFile)) {

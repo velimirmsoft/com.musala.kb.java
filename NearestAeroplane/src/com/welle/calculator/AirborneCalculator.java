@@ -8,20 +8,16 @@ import com.welle.settings.and.constants.Const;
 import com.welle.settings.and.constants.MyMath;
 import com.welle.unity.AirborneAirplane;
 
-public class AirborneDataImpl implements CalcNearestAirborne, CalcSpeedOfAirplane {
+public class AirborneCalculator implements CalcNearestAirborne, CalcSpeedOfAirplane {
 
 	private AirborneAirplane previousPlane = null;
 
 	private Long timeBetweenStates = (long) 0;
-	private Float previousSpeed = 0.0f;
 
 	@Override
 	public AirborneAirplane calculateNearesAirborne(ArrayList<AirborneAirplane> planes, Float myLatitude, Float myLongitude) {
 
 		System.out.println("Calculating nearest airborne plane!");
-
-		// Position myPos = determinatePosition(myLatitude, myLongitude);
-		// System.out.println("My pos = " + myPos);
 
 		Float minDistance = 1000000000.0f;
 		int indexOfOurClosestAirplane = 0, counter = 0;
@@ -35,7 +31,6 @@ public class AirborneDataImpl implements CalcNearestAirborne, CalcSpeedOfAirplan
 		}
 
 		AirborneAirplane finalPlane = planes.get(indexOfOurClosestAirplane);
-
 		finalPlane.setGeodesicDistance(minDistance);
 		finalPlane.setSpeedOfAirplane(getVelocityOfOurAirplane(getPrivousStateOfOurAirplane(), finalPlane, timeBetweenStates));
 		setPrivousStateOfOurAirplane(finalPlane);

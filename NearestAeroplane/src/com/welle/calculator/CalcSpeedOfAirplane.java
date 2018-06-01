@@ -7,8 +7,6 @@ import com.welle.unity.AirborneAirplane;
 
 public interface CalcSpeedOfAirplane {
 
-	// save privous state of our airplanes
-
 	public void setPrivousStateOfOurAirplane(AirborneAirplane a);
 
 	public AirborneAirplane getPrivousStateOfOurAirplane();

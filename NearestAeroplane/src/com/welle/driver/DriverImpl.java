@@ -4,9 +4,9 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.welle.calculator.AirborneDataImpl;
-import com.welle.database.DatabaseManagerOracle;
-import com.welle.database.MyDatabaseManager;
+import com.welle.calculator.AirborneCalculator;
+import com.welle.database.DatabaseManager;
+import com.welle.database.MyDatabaseManagerOracle;
 import com.welle.fetcher.FetchAirplaneData;
 import com.welle.fetcher.FetchAirplaneDataImpl;
 import com.welle.plot.data.PlotMyAirplaneData;
@@ -23,12 +23,18 @@ public class DriverImpl implements Driver {
 
 	private PlotMyData plotter;
 	private FetchAirplaneData fetcher;
-	private AirborneDataImpl calculator;
+	private AirborneCalculator calculator;
 	private WriteFileToDisk writterToDisk;
-	private DatabaseManagerOracle myDbManager;
+	private DatabaseManager myDbManager;
 
 	@Override
 	public void getInputAndStartLoop(long timePeriod) {
+
+		if (timePeriod < 10000) {
+			timePeriod = 10000;
+			System.out.println("This program works best for 'time intervals' larger then 10 secs ...");
+			System.out.println("timePeriod set to 10 secs ...");
+		}
 
 		System.out.println("Welcome to my NeareastAirborne tracker ...");
 		System.out.println("Enter your Latitude or Longitude or enter 'c' to use default coordinates ...");
@@ -37,21 +43,18 @@ public class DriverImpl implements Driver {
 
 		// init things
 		fetcher = new FetchAirplaneDataImpl();
-		calculator = new AirborneDataImpl();
-		writterToDisk = new WriteAllAirplanesToDiskCVS();
-		writterToDisk.setPath("C:\\velimir-avramovski-work\\java-things\\writeFilesHere\\");
-		myDbManager = new MyDatabaseManager();
-		myDbManager.connectToDB(Const.JBDC_TO_ORACLE_DB, Const.DB_USER, Const.DB_PASS);
-		// myDbManager.clearFromDb(Const.DB_NAME);
-
-		// init our plotter
+		calculator = new AirborneCalculator();
 		plotter = new PlotMyAirplaneData();
 		plotter.initPlot();
 		plotter.showPlot();
+		writterToDisk = new WriteAllAirplanesToDiskCVS();
+		writterToDisk.setPath("C:\\velimir-avramovski-work\\java-things\\writeFilesHere\\");
+		myDbManager = new MyDatabaseManagerOracle();
+		myDbManager.connectToDB(Const.JBDC_TO_ORACLE_DB, Const.DB_USER, Const.DB_PASS);
 
 		Scanner sc = new Scanner(System.in);
-		// String input = sc.nextLine();
-		String input = "c"; // for faster testing :D
+		String input = sc.nextLine();
+		// String input = "c"; // for faster testing :D
 		if (input.equals("c")) {
 			loopFetchAndCalculate(timePeriod, Const.DEF_LATITUDE, Const.DEF_LONGITUDE);
 		} else {
@@ -68,11 +71,11 @@ public class DriverImpl implements Driver {
 			public void run() {
 				loopCounter++;
 				fetcher.fetchAndStoreAeroplaneData();
-				writterToDisk.writeAllAirplanesToDisk("fetchedData_" + fetcher.returnTimeOfFetch(), fetcher.returnTimeOfFetch(), fetcher.returnPlanes());
 				AirborneAirplane a = calculator.calculateNearesAirborne(fetcher.returnPlanes(), myLatitude, myLongitude);
-				myDbManager.putToDb(a, Const.DB_NAME, fetcher.returnTimeOfFetch());
 				plotter.addAndUpdatePlot(a.toString(), loopCounter, a.getGeodesicDistance(), a.getGeometricAltitude(), a.getSpeedOfAirplane(), fetcher.getLatForAllAirbornes(),
 						fetcher.getLongForAllAirbornes());
+				writterToDisk.writeAirplanesDataToDisk("fetchedData_" + fetcher.returnTimeOfFetch(), fetcher.returnTimeOfFetch(), fetcher.returnPlanes());
+				myDbManager.putToDb(a, Const.DB_NAME, fetcher.returnTimeOfFetch());
 			}
 		};
 		loopFetchTimer = new Timer("looper");
